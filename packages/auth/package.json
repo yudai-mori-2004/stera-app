@@ -1,0 +1,25 @@
+{
+  "name": "@stera/auth",
+  "type": "module",
+  "exports": {
+    ".": {
+      "default": "./src/index.ts"
+    },
+    "./*": {
+      "default": "./src/*.ts"
+    }
+  },
+  "dependencies": {
+    "@stera/db": "workspace:*",
+    "@stera/env": "workspace:*",
+    "better-auth": "catalog:",
+    "dotenv": "catalog:",
+    "drizzle-orm": "catalog:",
+    "jose": "^6.0.11",
+    "zod": "catalog:"
+  },
+  "devDependencies": {
+    "@stera/config": "workspace:*",
+    "typescript": "catalog:"
+  }
+}

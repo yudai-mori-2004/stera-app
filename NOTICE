@@ -1,0 +1,57 @@
+Stera App
+Copyright 2026 FPV Labs
+
+This product includes software developed at FPV Labs (https://fpvlabs.ai).
+
+Licensed under the Apache License, Version 2.0. See LICENSE for the full text.
+
+--------------------------------------------------------------------------------
+Bundled fonts
+--------------------------------------------------------------------------------
+
+apps/mobile/assets/fonts/ contains font software licensed under the SIL Open
+Font License, Version 1.1, not under the Apache License. The full OFL text and
+these copyright notices travel with the fonts in
+apps/mobile/assets/fonts/OFL.txt.
+
+  Copyright 2024 The Geist Project Authors
+  (https://github.com/vercel/geist-font.git)
+  Geist, Geist Mono
+
+  Copyright 2017 The EB Garamond Project Authors
+  (https://github.com/octaviopardo/EBGaramond12)
+  EB Garamond
+
+  Copyright 2018 The Handjet Project Authors
+  (https://github.com/rosettatype/Handjet/)
+  Handjet
+
+  Copyright 2020 The JetBrains Mono Project Authors
+  (https://github.com/JetBrains/JetBrainsMono)
+  JetBrains Mono
+
+packages/brand/docs/fonts/ contains WOFF2 subsets of Geist, Geist Mono and
+EB Garamond under the same OFL terms, inlined into the generated white-label
+guide.
+
+--------------------------------------------------------------------------------
+Stera-10M dataset
+--------------------------------------------------------------------------------
+
+The Stera-10M dataset (https://huggingface.co/datasets/fpvlabs/stera-10m) is
+released separately under Creative Commons Attribution-NonCommercial 4.0
+International (CC BY-NC 4.0), with additional terms for its WiLoR and MANO
+derived components. The Apache License in this repository covers the source
+code only and does not grant any rights to the dataset.
+
+--------------------------------------------------------------------------------
+Vendored dependencies
+--------------------------------------------------------------------------------
+
+apps/mobile/ios/Pods/ contains CocoaPods dependencies checked in for
+reproducible iOS builds. Each retains its own license file in its own
+directory and is not covered by this NOTICE.
+
+Package dependencies resolved at build time (bun.lock, pubspec.lock,
+Podfile.lock, Gradle) are not redistributed in this repository and remain
+under their respective licenses.

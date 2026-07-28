@@ -1,0 +1,59 @@
+{
+  "name": "stera-open",
+  "private": true,
+  "workspaces": {
+    "packages": [
+      "apps/*",
+      "packages/*"
+    ],
+    "catalog": {
+      "@types/node": "^22.13.14",
+      "better-auth": "1.6.25",
+      "dotenv": "^17.2.2",
+      "drizzle-orm": "^0.45.2",
+      "hono": "^4.12.32",
+      "typescript": "^6.0.3",
+      "zod": "^4.4.3"
+    }
+  },
+  "type": "module",
+  "scripts": {
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "check-types": "turbo run check-types",
+    "dev:server": "turbo run dev -F server",
+    "db:generate": "turbo run db:generate -F @stera/db",
+    "db:migrate": "turbo run db:migrate -F @stera/db",
+    "db:view": "turbo run db:view -F @stera/db",
+    "db:view:prod": "turbo run db:view:prod -F @stera/db",
+    "db:studio": "turbo run db:view -F @stera/db",
+    "db:studio:prod": "turbo run db:view:prod -F @stera/db",
+    "dev:mobile": "turbo run dev -F @stera/mobile",
+    "lint:mobile": "turbo run lint -F @stera/mobile -F @stera/recorder",
+    "test:mobile": "turbo run test -F @stera/mobile",
+    "pub-get:mobile": "turbo run pub-get -F @stera/mobile",
+    "build:mobile:apk": "turbo run build:apk -F @stera/mobile",
+    "build:mobile:ipa": "turbo run build:ipa -F @stera/mobile",
+    "check": "ultracite check",
+    "fix": "ultracite fix",
+    "brand:apply": "bun run packages/brand/apply.ts",
+    "brand:check": "bun run packages/brand/apply.ts --dry-run",
+    "brand:preview": "bun run packages/brand/preview.ts",
+    "brand:accent": "bun run packages/brand/accent.ts",
+    "brand:verify": "bun run packages/brand/verify.ts",
+    "brand:test": "bun test packages/brand/",
+    "brand:guide": "bun run packages/brand/docs/build.ts"
+  },
+  "devDependencies": {
+    "@stera/config": "workspace:*",
+    "@types/bun": "^1.3.14",
+    "@types/node": "catalog:",
+    "oxfmt": "^0.60.0",
+    "oxlint": "^1.75.0",
+    "sharp": "^0.35.3",
+    "turbo": "^2.10.6",
+    "typescript": "catalog:",
+    "ultracite": "7.9.4"
+  },
+  "packageManager": "bun@1.3.14"
+}

@@ -1,0 +1,14 @@
+{
+  "name": "@stera/mobile",
+  "private": true,
+  "scripts": {
+    "dev": "flutter run",
+    "build": "flutter build appbundle",
+    "build:apk": "flutter build apk",
+    "build:ipa": "flutter build ipa",
+    "lint": "flutter analyze",
+    "test": "flutter test",
+    "pub-get": "dart run tool/sync_google_client_ids.dart && dart run tool/sync_ios_config.dart && flutter pub get",
+    "clean": "flutter clean"
+  }
+}

@@ -1,0 +1,1221 @@
+<title>White-label guide</title>
+
+<style>
+  @font-face {
+    font-family: "EBGaramond";
+    src: url("data:font/woff2;base64,__GARAMOND__") format("woff2");
+    font-weight: 400 800;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "Geist";
+    src: url("data:font/woff2;base64,__GEIST__") format("woff2");
+    font-weight: 100 900;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "GeistMono";
+    src: url("data:font/woff2;base64,__GEISTMONO__") format("woff2");
+    font-weight: 100 900;
+    font-display: swap;
+  }
+
+  /* Tokens mirror apps/mobile/lib/src/core/theme/colors.dart (class C).
+     The palette is deliberately near-monochrome: everything keys off
+     --text-primary, and --accent is the only chromatic token. */
+  :root {
+    --surface-primary: #f8f9fa;
+    --surface-secondary: #ffffff;
+    --surface-tertiary: #f7f4ed;
+    --text-primary: #18191b;
+    --text-secondary: #737373;
+    --text-tertiary: #bbbec3;
+    --border-default: #b7b7b7;
+    --border-divider: #e0e0e0;
+    --accent: #e8a33d;
+    --accent-ink: #8a5c12;
+    --destructive: #d32f2f;
+    --positive: #047a00;
+    --terminal-bg: #18191b;
+    --terminal-fg: #e8e9ea;
+    --terminal-dim: #8b8d90;
+
+    --measure: 68ch;
+    --rail: 15rem;
+
+    --step-0: 0.75rem;
+    --step-1: 0.8125rem;
+    --step-2: 0.9375rem;
+    --step-3: 1.0625rem;
+    --step-4: 1.375rem;
+    --step-5: 1.875rem;
+    --step-6: clamp(2.5rem, 6vw, 3.75rem);
+
+    color-scheme: light;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --surface-primary: #18191b;
+      --surface-secondary: #232426;
+      --surface-tertiary: #2e2f31;
+      --text-primary: #ffffff;
+      --text-secondary: #bbbec3;
+      --text-tertiary: #737373;
+      --border-default: #5c5c5c;
+      --border-divider: #3d3d3d;
+      --accent: #ffb740;
+      --accent-ink: #ffcf80;
+      --destructive: #ef5350;
+      --positive: #32d74b;
+      --terminal-bg: #0f1011;
+      --terminal-fg: #e8e9ea;
+      --terminal-dim: #8b8d90;
+      color-scheme: dark;
+    }
+  }
+
+  /* The viewer's toggle stamps data-theme on the root; it must beat the
+     media query in both directions. */
+  :root[data-theme="dark"] {
+    --surface-primary: #18191b;
+    --surface-secondary: #232426;
+    --surface-tertiary: #2e2f31;
+    --text-primary: #ffffff;
+    --text-secondary: #bbbec3;
+    --text-tertiary: #737373;
+    --border-default: #5c5c5c;
+    --border-divider: #3d3d3d;
+    --accent: #ffb740;
+    --accent-ink: #ffcf80;
+    --destructive: #ef5350;
+    --positive: #32d74b;
+    --terminal-bg: #0f1011;
+    --terminal-fg: #e8e9ea;
+    --terminal-dim: #8b8d90;
+    color-scheme: dark;
+  }
+
+  :root[data-theme="light"] {
+    --surface-primary: #f8f9fa;
+    --surface-secondary: #ffffff;
+    --surface-tertiary: #f7f4ed;
+    --text-primary: #18191b;
+    --text-secondary: #737373;
+    --text-tertiary: #bbbec3;
+    --border-default: #b7b7b7;
+    --border-divider: #e0e0e0;
+    --accent: #e8a33d;
+    --accent-ink: #8a5c12;
+    --destructive: #d32f2f;
+    --positive: #047a00;
+    --terminal-bg: #18191b;
+    --terminal-fg: #e8e9ea;
+    --terminal-dim: #8b8d90;
+    color-scheme: light;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--surface-primary);
+    color: var(--text-primary);
+    font-family: "Geist", ui-sans-serif, system-ui, -apple-system, sans-serif;
+    font-size: var(--step-2);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .page {
+    max-width: 78rem;
+    margin: 0 auto;
+    padding: 0 1.5rem 6rem;
+  }
+
+  /* ---------- masthead ---------- */
+
+  .masthead {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    padding: clamp(3rem, 9vw, 6rem) 0 2.5rem;
+    border-bottom: 1px solid var(--border-divider);
+  }
+
+  .badge {
+    align-self: flex-start;
+    display: inline-block;
+    padding: 3px 8px;
+    border-radius: 999px;
+    border: 1px solid color-mix(in srgb, var(--accent) 55%, transparent);
+    background: color-mix(in srgb, var(--accent) 12%, transparent);
+    color: var(--accent);
+    font-size: var(--step-0);
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .masthead h1 {
+    font-family: "EBGaramond", Georgia, serif;
+    font-size: var(--step-6);
+    font-weight: 500;
+    line-height: 1.05;
+    letter-spacing: -0.015em;
+    margin: 0;
+    text-wrap: balance;
+  }
+
+  .masthead .standfirst {
+    max-width: var(--measure);
+    margin: 0;
+    color: var(--text-secondary);
+    font-size: var(--step-3);
+    line-height: 1.6;
+  }
+
+  .masthead .standfirst strong {
+    color: var(--text-primary);
+    font-weight: 600;
+  }
+
+  .facts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 2.25rem;
+    margin-top: 0.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border-divider);
+    list-style: none;
+  }
+
+  .facts li {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+  }
+
+  .facts dt, .facts .k {
+    font-size: var(--step-0);
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+  }
+
+  .facts .v {
+    font-family: "EBGaramond", Georgia, serif;
+    font-size: var(--step-4);
+    line-height: 1.2;
+  }
+
+  /* ---------- shell ---------- */
+
+  .shell {
+    display: grid;
+    grid-template-columns: var(--rail) minmax(0, 1fr);
+    gap: 4rem;
+    align-items: start;
+    padding-top: 3rem;
+  }
+
+  .rail {
+    position: sticky;
+    top: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.125rem;
+  }
+
+  .rail .rail-title {
+    font-size: var(--step-0);
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+    padding-bottom: 0.75rem;
+  }
+
+  .rail a {
+    display: grid;
+    grid-template-columns: 1.75rem 1fr;
+    gap: 0.5rem;
+    align-items: baseline;
+    padding: 0.4rem 0;
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: var(--step-1);
+    border-left: 2px solid transparent;
+    padding-left: 0.75rem;
+    transition: color 0.15s ease, border-color 0.15s ease;
+  }
+
+  .rail a .n {
+    font-family: "EBGaramond", Georgia, serif;
+    font-size: var(--step-2);
+    color: var(--text-tertiary);
+  }
+
+  .rail a:hover { color: var(--text-primary); }
+
+  .rail a.is-active {
+    color: var(--text-primary);
+    border-left-color: var(--accent);
+    font-weight: 500;
+  }
+
+  .rail a.is-active .n { color: var(--accent); }
+
+  main { min-width: 0; }
+
+  /* ---------- steps ---------- */
+
+  .step {
+    padding-bottom: 3.5rem;
+    margin-bottom: 3.5rem;
+    border-bottom: 1px solid var(--border-divider);
+    scroll-margin-top: 2rem;
+  }
+
+  .step:last-of-type { border-bottom: 0; }
+
+  .step-head {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1.25rem;
+    align-items: start;
+    margin-bottom: 1.5rem;
+  }
+
+  /* The one bold moment: Garamond numerals in the accent, echoing the
+     app's splash wordmark. Everything around them stays quiet. */
+  .step-head .num {
+    font-family: "EBGaramond", Georgia, serif;
+    font-size: var(--step-6);
+    line-height: 0.85;
+    color: var(--accent);
+    font-weight: 500;
+  }
+
+  .step-head h2 {
+    font-family: "EBGaramond", Georgia, serif;
+    font-size: var(--step-5);
+    font-weight: 500;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    margin: 0;
+    text-wrap: balance;
+  }
+
+  .step-head .sub {
+    margin: 0.35rem 0 0;
+    color: var(--text-secondary);
+    font-size: var(--step-2);
+  }
+
+  .step > p,
+  .step > ul,
+  .step > ol,
+  .step > .note,
+  .step > .figure {
+    max-width: var(--measure);
+  }
+
+  .step p { margin: 0 0 1rem; }
+
+  .step h3 {
+    font-size: var(--step-3);
+    font-weight: 600;
+    margin: 2rem 0 0.75rem;
+    letter-spacing: -0.005em;
+  }
+
+  .step ul, .step ol {
+    margin: 0 0 1rem;
+    padding-left: 1.15rem;
+  }
+
+  .step li { margin-bottom: 0.5rem; }
+
+  .step li::marker { color: var(--text-tertiary); }
+
+  code {
+    font-family: "GeistMono", ui-monospace, SFMono-Regular, monospace;
+    font-size: 0.9em;
+    background: var(--surface-tertiary);
+    border: 1px solid var(--border-divider);
+    border-radius: 4px;
+    padding: 0.1em 0.35em;
+    white-space: nowrap;
+  }
+
+  a { color: var(--text-primary); text-decoration-color: var(--accent); }
+
+  strong { font-weight: 600; }
+
+  /* ---------- terminal ---------- */
+
+  .term {
+    position: relative;
+    background: var(--terminal-bg);
+    border: 1px solid var(--border-divider);
+    border-radius: 10px;
+    margin: 0 0 1.25rem;
+    overflow: hidden;
+  }
+
+  .term-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.5rem 0.75rem 0.5rem 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.09);
+  }
+
+  .term-bar .label {
+    font-family: "GeistMono", ui-monospace, monospace;
+    font-size: var(--step-0);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--terminal-dim);
+  }
+
+  .copy {
+    font-family: "Geist", system-ui, sans-serif;
+    font-size: var(--step-0);
+    color: var(--terminal-dim);
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 5px;
+    padding: 0.2rem 0.5rem;
+    cursor: pointer;
+    transition: color 0.15s ease, border-color 0.15s ease;
+  }
+
+  .copy:hover { color: var(--terminal-fg); border-color: rgba(255, 255, 255, 0.4); }
+  .copy:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .copy[data-done="1"] { color: var(--positive); border-color: var(--positive); }
+
+  .term pre {
+    margin: 0;
+    padding: 0.9rem 1rem 1rem;
+    overflow-x: auto;
+    font-family: "GeistMono", ui-monospace, monospace;
+    font-size: var(--step-1);
+    line-height: 1.7;
+    color: var(--terminal-fg);
+  }
+
+  .term .p { color: var(--accent); }
+  .term .c { color: var(--terminal-dim); }
+  .term .ok { color: var(--positive); }
+  .term .bad { color: var(--destructive); }
+
+  /* ---------- note ---------- */
+
+  .note {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.85rem;
+    padding: 0.9rem 1.1rem;
+    margin: 0 0 1.25rem;
+    background: var(--surface-secondary);
+    border: 1px solid var(--border-divider);
+    border-left: 2px solid var(--text-tertiary);
+    border-radius: 6px;
+    font-size: var(--step-1);
+    line-height: 1.6;
+  }
+
+  .note .tag {
+    font-size: var(--step-0);
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+    padding-top: 0.15rem;
+  }
+
+  .note p { margin: 0 0 0.5rem; }
+  .note p:last-child { margin-bottom: 0; }
+
+  .note--warn { border-left-color: var(--accent); }
+  .note--warn .tag { color: var(--accent); }
+  .note--stop { border-left-color: var(--destructive); }
+  .note--stop .tag { color: var(--destructive); }
+
+  /* ---------- figure: seam before/after ---------- */
+
+  .figure {
+    margin: 0 0 1.25rem;
+    border: 1px solid var(--border-divider);
+    border-radius: 10px;
+    overflow: hidden;
+    background: var(--surface-secondary);
+  }
+
+  .figure-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .figure-cell { padding: 0.9rem 1rem; min-width: 0; }
+  .figure-cell + .figure-cell { border-left: 1px solid var(--border-divider); }
+
+  .figure-cell .k {
+    display: block;
+    font-size: var(--step-0);
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+    margin-bottom: 0.5rem;
+  }
+
+  .figure-cell pre {
+    margin: 0;
+    overflow-x: auto;
+    font-family: "GeistMono", ui-monospace, monospace;
+    font-size: var(--step-1);
+    line-height: 1.7;
+    color: var(--text-primary);
+  }
+
+  .figure-cell .was { color: var(--text-secondary); }
+  .figure-cell .now { color: var(--accent-ink); }
+
+  .figure-foot {
+    padding: 0.6rem 1rem;
+    border-top: 1px solid var(--border-divider);
+    background: var(--surface-tertiary);
+    font-size: var(--step-1);
+    color: var(--text-secondary);
+  }
+
+  /* ---------- tables ---------- */
+
+  .table-wrap {
+    overflow-x: auto;
+    border: 1px solid var(--border-divider);
+    border-radius: 10px;
+    margin: 0 0 1.25rem;
+    background: var(--surface-secondary);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: var(--step-1);
+  }
+
+  th, td {
+    text-align: left;
+    padding: 0.65rem 1rem;
+    border-bottom: 1px solid var(--border-divider);
+    vertical-align: top;
+  }
+
+  thead th {
+    font-size: var(--step-0);
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+    font-weight: 500;
+    white-space: nowrap;
+  }
+
+  tbody tr:last-child td { border-bottom: 0; }
+
+  td code { white-space: nowrap; }
+
+  td .req {
+    font-size: var(--step-0);
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  /* ---------- interview cards ---------- */
+
+  .asks {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    gap: 0.75rem;
+    margin: 0 0 1.25rem;
+  }
+
+  .ask {
+    padding: 0.9rem 1rem;
+    background: var(--surface-secondary);
+    border: 1px solid var(--border-divider);
+    border-radius: 8px;
+  }
+
+  .ask .q {
+    font-weight: 600;
+    margin: 0 0 0.3rem;
+    font-size: var(--step-2);
+  }
+
+  .ask .a {
+    margin: 0;
+    color: var(--text-secondary);
+    font-size: var(--step-1);
+    line-height: 1.55;
+  }
+
+  /* ---------- checklist ---------- */
+
+  .checks { list-style: none; padding: 0; margin: 0 0 1.25rem; }
+
+  .checks li {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.65rem;
+    padding: 0.55rem 0;
+    border-bottom: 1px solid var(--border-divider);
+    font-size: var(--step-2);
+  }
+
+  .checks li:last-child { border-bottom: 0; }
+  .checks .mark { color: var(--positive); font-weight: 700; }
+  .checks .mark--todo { color: var(--text-tertiary); }
+
+  /* ---------- footer ---------- */
+
+  .foot {
+    margin-top: 4rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border-divider);
+    color: var(--text-tertiary);
+    font-size: var(--step-1);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.5rem;
+    justify-content: space-between;
+  }
+
+  /* ---------- responsive ---------- */
+
+  @media (max-width: 62rem) {
+    .shell { grid-template-columns: minmax(0, 1fr); gap: 0; }
+    .rail { display: none; }
+    .figure-grid { grid-template-columns: 1fr; }
+    .figure-cell + .figure-cell {
+      border-left: 0;
+      border-top: 1px solid var(--border-divider);
+    }
+    .step-head { grid-template-columns: 1fr; gap: 0.35rem; }
+    .step-head .num { font-size: var(--step-5); line-height: 1; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; animation: none !important; }
+    html { scroll-behavior: auto; }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html { scroll-behavior: smooth; }
+  }
+</style>
+
+<div class="page">
+
+  <header class="masthead">
+    <span class="badge">Open source</span>
+    <h1>Make this app yours</h1>
+    <p class="standfirst">
+      Clone the repo, type one command, answer five questions. You get a
+      shippable app under your own name, icon and colour &mdash; bundle IDs,
+      package names, deploy config and all. <strong>The renaming is done by a
+      script, not by hand</strong>, so it is repeatable and you can undo it with
+      one <code>git checkout</code>.
+    </p>
+    <ul class="facts">
+      <li><span class="k">Command</span><span class="v">/whitelabel</span></li>
+      <li><span class="k">Files changed</span><span class="v">~373</span></li>
+      <li><span class="k">Time</span><span class="v">~10 min</span></li>
+      <li><span class="k">Reversible</span><span class="v">Yes</span></li>
+    </ul>
+  </header>
+
+  <div class="shell">
+
+    <nav class="rail" aria-label="Steps">
+      <span class="rail-title">Guide</span>
+      <a href="#before"><span class="n">0</span><span>Before you start</span></a>
+      <a href="#clone"><span class="n">1</span><span>Clone &amp; install</span></a>
+      <a href="#interview"><span class="n">2</span><span>Run /whitelabel</span></a>
+      <a href="#preview"><span class="n">3</span><span>Preview the plan</span></a>
+      <a href="#apply"><span class="n">4</span><span>Apply it</span></a>
+      <a href="#verify"><span class="n">5</span><span>Verify</span></a>
+      <a href="#finish"><span class="n">6</span><span>Finish by hand</span></a>
+      <a href="#config"><span class="n">&mdash;</span><span>brand.json</span></a>
+      <a href="#again"><span class="n">&mdash;</span><span>Changing it later</span></a>
+      <a href="#limits"><span class="n">&mdash;</span><span>What it won't do</span></a>
+      <a href="#trouble"><span class="n">&mdash;</span><span>Troubleshooting</span></a>
+    </nav>
+
+    <main>
+
+      <!-- 0 -->
+      <section class="step" id="before">
+        <div class="step-head">
+          <span class="num">0</span>
+          <div>
+            <h2>Before you start</h2>
+            <p class="sub">Four things to have ready.</p>
+          </div>
+        </div>
+
+        <ul>
+          <li><strong>A name.</strong> Everything else defaults from it.</li>
+          <li><strong>A bundle ID</strong> in reverse-DNS form, like
+            <code>com.acmerobotics.vision</code>. This is effectively permanent
+            once your app is in a store, so pick it deliberately.</li>
+          <li><strong>A website, contact email, and your fork's repo URL.</strong></li>
+          <li><strong>A logo</strong> &mdash; a square PNG of at least 512px, or an
+            SVG. Optional: if you have nothing, the tool draws a placeholder
+            monogram so the app still builds, and reminds you to replace it.</li>
+        </ul>
+
+        <div class="note note--warn">
+          <span class="tag">Heads up</span>
+          <div>
+            <p>Two things in this repo are gitignored, so a fresh clone can't
+              build until you create them. This is true before any rebranding &mdash;
+              it isn't something the tool breaks.</p>
+            <p><code>apps/mobile/.env</code> (copy from <code>.env.example</code>)
+              and <code>apps/mobile/android/key.properties</code>. The Android
+              one is needed <em>even for a debug build</em>. Both are listed in
+              the checklist the tool generates for you.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 1 -->
+      <section class="step" id="clone">
+        <div class="step-head">
+          <span class="num">1</span>
+          <div>
+            <h2>Clone and install</h2>
+            <p class="sub">Install first &mdash; the tool refuses to run otherwise.</p>
+          </div>
+        </div>
+
+        <div class="term">
+          <div class="term-bar">
+            <span class="label">terminal</span>
+            <button class="copy" type="button">Copy</button>
+          </div>
+<pre><code><span class="p">$</span> git clone https://github.com/fpv-labs/stera-app my-app
+<span class="p">$</span> cd my-app
+<span class="p">$</span> bun install</code></pre>
+        </div>
+
+        <p>Then commit, so the rebrand lands on a clean tree. That is what makes
+          it revertable in one move &mdash; and the tool will stop and ask you to do
+          this if you skip it.</p>
+
+        <div class="term">
+          <div class="term-bar">
+            <span class="label">terminal</span>
+            <button class="copy" type="button">Copy</button>
+          </div>
+<pre><code><span class="p">$</span> git add -A &amp;&amp; git commit -m <span class="c">"starting point"</span></code></pre>
+        </div>
+      </section>
+
+      <!-- 2 -->
+      <section class="step" id="interview">
+        <div class="step-head">
+          <span class="num">2</span>
+          <div>
+            <h2>Run /whitelabel</h2>
+            <p class="sub">Open Claude Code in the repo and type it.</p>
+          </div>
+        </div>
+
+        <div class="term">
+          <div class="term-bar">
+            <span class="label">claude code</span>
+            <button class="copy" type="button">Copy</button>
+          </div>
+<pre><code><span class="p">&gt;</span> /whitelabel</code></pre>
+        </div>
+
+        <p>It asks a short set of questions and writes your answers to
+          <code>packages/brand/brand.json</code>. It doesn't rename anything itself &mdash;
+          that's the script's job in step 4.</p>
+
+        <div class="asks">
+          <div class="ask">
+            <p class="q">What's it called?</p>
+            <p class="a">Name and company. The tagline too, if you want to change it.</p>
+          </div>
+          <div class="ask">
+            <p class="q">Bundle ID?</p>
+            <p class="a">It suggests one from your name and website. You can correct it.</p>
+          </div>
+          <div class="ask">
+            <p class="q">Links?</p>
+            <p class="a">Website, contact email, your fork's repo. Terms and privacy URLs derive from the website.</p>
+          </div>
+          <div class="ask">
+            <p class="q">Accent colour?</p>
+            <p class="a">One hex. The palette is near-monochrome by design, so this is the only colour decision.</p>
+          </div>
+          <div class="ask">
+            <p class="q">Logo?</p>
+            <p class="a">Point at a file, or have one drawn for you as a placeholder.</p>
+          </div>
+          <div class="ask">
+            <p class="q">Existing users?</p>
+            <p class="a">Only asked if relevant. Says whether to keep local data compatible. See <a href="#again">below</a>.</p>
+          </div>
+        </div>
+
+        <p>Before writing anything it shows you what it worked out from your
+          answers, because several are awkward to change later:</p>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Derived</th><th>From &ldquo;Acme Vision&rdquo; / <code>com.acmerobotics.vision</code></th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Flutter package</td><td><code>acme_vision</code> <span style="color:var(--text-tertiary)">&mdash; rewrites ~940 imports</span></td></tr>
+              <tr><td>npm scope</td><td><code>@acme-vision</code></td></tr>
+              <tr><td>Kotlin package</td><td><code>com.acmerobotics.vision</code></td></tr>
+              <tr><td>Recorder plugin</td><td><code>acme_vision_recorder</code></td></tr>
+              <tr><td>systemd unit</td><td><code>acme-vision-server.service</code></td></tr>
+              <tr><td>R2 buckets</td><td><code>acme-vision-uploads</code>, <code>&hellip;-prod</code></td></tr>
+              <tr><td>API hosts</td><td><code>app-dev.acmerobotics.com</code></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- 3 -->
+      <section class="step" id="preview">
+        <div class="step-head">
+          <span class="num">3</span>
+          <div>
+            <h2>Look at it</h2>
+            <p class="sub">Nothing is written yet.</p>
+          </div>
+        </div>
+
+        <p>Before anything touches your tree, render the brand as a page:</p>
+
+        <div class="term">
+          <div class="term-bar">
+            <span class="label">terminal</span>
+            <button class="copy" type="button">Copy</button>
+          </div>
+<pre><code><span class="p">$</span> bun run brand:preview</code></pre>
+        </div>
+
+        <p>That writes <code>packages/brand/preview.html</code> &mdash; open it
+          directly, no server needed. It shows your launcher icon under the iOS
+          and Android masks, your mark on light and dark plates, mock splash,
+          sign-in, home and profile screens in both modes, every colour token
+          with its WCAG grade, the type specimens, the radius scale, and a table
+          of exactly what changes.</p>
+
+        <p><strong>This is the loop.</strong> Edit <code>brand.json</code>,
+          re-run the preview, look, repeat. It applies nothing, needs no
+          artwork pipeline and works on a dirty tree, so it costs you seconds
+          and commits you to nothing. Only once you like what you see is it
+          worth printing the plan:</p>
+
+        <div class="term">
+          <div class="term-bar">
+            <span class="label">terminal</span>
+            <button class="copy" type="button">Copy</button>
+          </div>
+<pre><code><span class="p">$</span> bun run brand:check</code></pre>
+        </div>
+
+        <div class="term">
+          <div class="term-bar">
+            <span class="label">output</span>
+          </div>
+<pre><code>Rebranding Stera (open.fpvlabs.stera) &rarr; Acme Vision (com.acmerobotics.vision)
+Dry run: nothing will be written.
+
+  13 directory rename(s), affecting 208 file(s)
+  328 file(s) contain brand tokens:
+      874  app Dart imports
+      115  recorder Kotlin package
+       65  npm workspace scope
+       <span class="c">&hellip;</span>
+  kept 3 legacy schema alias(es) so older recordings still decode
+  hoisted brand literals out of 8 Dart file(s)</code></pre>
+        </div>
+
+        <p>That last line is the interesting one. On the first run only, the tool
+          moves every hard-coded brand string out of the UI and into one
+          generated file, then points the app at it:</p>
+
+        <div class="figure">
+          <div class="figure-grid">
+            <div class="figure-cell">
+              <span class="k">Before</span>
+<pre><code><span class="was">Text(<span class="now">"Stera"</span>, style: &hellip;)
+
+textPrimary: <span class="now">Color(0xFF18191B)</span>
+
+BorderRadius.circular(<span class="now">12</span>)
+
+fontFamily: <span class="now">"EBGaramond"</span></span></code></pre>
+            </div>
+            <div class="figure-cell">
+              <span class="k">After</span>
+<pre><code><span class="was">Text(<span class="now">Brand.splashTitle</span>, style: &hellip;)
+
+textPrimary: <span class="now">BrandPalette.textPrimaryLight</span>
+
+BorderRadius.circular(<span class="now">BrandShape.radiusMd</span>)
+
+fontFamily: <span class="now">BrandFonts.display</span></span></code></pre>
+            </div>
+          </div>
+          <p class="figure-foot">Which is why changing your mind later is cheap &mdash;
+            it regenerates a handful of files instead of rewriting thirty. Every
+            colour, every corner radius and every typeface in the app becomes
+            reachable from <code>brand.json</code>.</p>
+        </div>
+      </section>
+
+      <!-- 4 -->
+      <section class="step" id="apply">
+        <div class="step-head">
+          <span class="num">4</span>
+          <div>
+            <h2>Apply it</h2>
+            <p class="sub">The only step that writes anything.</p>
+          </div>
+        </div>
+
+        <div class="term">
+          <div class="term-bar">
+            <span class="label">terminal</span>
+            <button class="copy" type="button">Copy</button>
+          </div>
+<pre><code><span class="p">$</span> bun run brand:apply</code></pre>
+        </div>
+
+        <p>It renames directories, rewrites the tokens, generates every icon
+          size for both platforms, updates the deploy config, and rebuilds the
+          lockfiles. Then it stops.</p>
+
+        <div class="note">
+          <span class="tag">Note</span>
+          <div>
+            <p><strong>It never commits.</strong> Read <code>git diff</code>
+              yourself and commit when you're happy. If you hate it,
+              <code>git checkout .</code> puts everything back.</p>
+          </div>
+        </div>
+
+        <p>If a step fails, the error tells you whether it failed while
+          <em>planning</em> (nothing was written &mdash; just fix and re-run) or while
+          <em>writing</em> (the tree is half-done &mdash; fix and re-run, repeating a
+          finished step is safe).</p>
+      </section>
+
+      <!-- 5 -->
+      <section class="step" id="verify">
+        <div class="step-head">
+          <span class="num">5</span>
+          <div>
+            <h2>Verify</h2>
+            <p class="sub">Fourteen checks, then a real build.</p>
+          </div>
+        </div>
+
+        <div class="term">
+          <div class="term-bar">
+            <span class="label">terminal</span>
+            <button class="copy" type="button">Copy</button>
+          </div>
+<pre><code><span class="p">$</span> bun run brand:verify --full
+<span class="p">$</span> cd apps/mobile &amp;&amp; flutter build apk --debug</code></pre>
+        </div>
+
+        <p>Most of these catch things no compiler will. A background-upload task
+          ID that stopped matching between <code>Info.plist</code> and the Swift
+          that registers it compiles perfectly and simply never runs.</p>
+
+        <div class="term">
+          <div class="term-bar">
+            <span class="label">output</span>
+          </div>
+<pre><code><span class="ok">pass</span>  no stale brand tokens outside the attribution allowlist
+<span class="ok">pass</span>  upstream attribution was not scrubbed
+<span class="ok">pass</span>  every Kotlin package declaration matches its directory
+<span class="ok">pass</span>  the Dart package name and its imports agree
+<span class="ok">pass</span>  Android, iOS and Play Store app ids agree
+<span class="ok">pass</span>  the iOS background task id is declared in Info.plist
+<span class="c">&hellip;</span>
+<span class="ok">All 14 check(s) passed.</span></code></pre>
+        </div>
+
+        <div class="note note--warn">
+          <span class="tag">Bonus</span>
+          <div>
+            <p>The repo currently ships <strong>three different app IDs</strong>
+              &mdash; one on Android, another on iOS, a third in the Play Store
+              update link. The rebrand collapses all three onto your single
+              bundle ID, and the check above keeps them that way.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 6 -->
+      <section class="step" id="finish">
+        <div class="step-head">
+          <span class="num">6</span>
+          <div>
+            <h2>Finish by hand</h2>
+            <p class="sub">Everything needing an account only you can open.</p>
+          </div>
+        </div>
+
+        <p>The tool writes <code>packages/brand/TODO.md</code> with your names already
+          filled in. The ones that block a first build:</p>
+
+        <ul class="checks">
+          <li><span class="mark mark--todo">&#9633;</span><span><strong>Android keystore</strong> &rarr; <code>android/key.properties</code>. Needed even for debug.</span></li>
+          <li><span class="mark mark--todo">&#9633;</span><span><strong>Copy <code>.env.example</code> to <code>.env</code></strong> in <code>apps/mobile</code>.</span></li>
+          <li><span class="mark mark--todo">&#9633;</span><span><strong>Apple team ID</strong> if you're building for iOS. It is deliberately left blank rather than pointing at someone else's team.</span></li>
+        </ul>
+
+        <p>And the ones that can wait until you're actually shipping: Apple App
+          ID and Sign in with Apple, Google OAuth clients, R2 buckets, Postgres,
+          DNS, and the store listings.</p>
+      </section>
+
+      <!-- reference -->
+      <section class="step" id="config">
+        <div class="step-head">
+          <span class="num">&mdash;</span>
+          <div>
+            <h2>What's in brand.json</h2>
+            <p class="sub">Five required fields. Everything else has a sensible default.</p>
+          </div>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Field</th><th></th><th>What it does</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><code>brand.name</code></td><td><span class="req">Required</span></td><td>Your product name. Nearly everything else derives from it.</td></tr>
+              <tr><td><code>identifiers.bundleId</code></td><td><span class="req">Required</span></td><td>Reverse-DNS app ID, used on both platforms.</td></tr>
+              <tr><td><code>urls.website</code></td><td><span class="req">Required</span></td><td>Terms, privacy and API hostnames derive from this.</td></tr>
+              <tr><td><code>urls.contactEmail</code></td><td><span class="req">Required</span></td><td>Shown in the app.</td></tr>
+              <tr><td><code>urls.sourceRepo</code></td><td><span class="req">Required</span></td><td>Where the in-app &ldquo;view source&rdquo; link points.</td></tr>
+              <tr><td><code>brand.legalEntity</code></td><td></td><td>Company name. Defaults to the product name.</td></tr>
+              <tr><td><code>theme.brandAccentLight</code></td><td></td><td>Your accent. Run <code>bun run brand:accent &lt;artwork&gt;</code> to read one straight off your logo; the dark variant is derived by lifting it.</td></tr>
+              <tr><td><code>theme.tint</code></td><td></td><td><strong>0&ndash;1, and the one that matters.</strong> How much of your accent bleeds into the greys. 0 keeps Stera's palette exactly; 0.6 makes the page background visibly yours. Semantic colours never take tint.</td></tr>
+              <tr><td><code>theme.shape.style</code></td><td></td><td><code>sharp</code>, <code>soft</code> (as-is), <code>rounded</code> or <code>pill</code>. Changes the corner radii across the app.</td></tr>
+              <tr><td><code>fonts.display</code></td><td></td><td>The headline face. The cheapest change that stops your fork looking like this one. Supply files under <code>fonts.files</code> for a family the app doesn't already bundle.</td></tr>
+              <tr><td><code>assets.iconSource</code></td><td></td><td>Square PNG (512px+) or SVG. Every icon size is generated from it, and the in-app logo falls back to it, so one file is enough.</td></tr>
+              <tr><td><code>assets.logoDark</code></td><td></td><td>Only needed if your mark disappears on a dark background. The preview shows you whether it does.</td></tr>
+              <tr><td><code>theme.overrides</code></td><td></td><td>Pin any individual colour token, if the accent and tint aren't enough.</td></tr>
+              <tr><td><code>urls.playStoreAppId</code></td><td></td><td>Play Store listing id, once you have published. Must equal your <code>bundleId</code> &mdash; the updater looks the listing up by the id the running app was built with. Leave it out and Android update checks stay off.</td></tr>
+              <tr><td><code>urls.appStoreId</code></td><td></td><td>App Store numeric id. Leave it out and iOS update checks stay off.</td></tr>
+              <tr><td><code>urls.updateFeed</code></td><td></td><td>A Sparkle-style appcast XML feed, for shipping outside the stores. Wins over both store ids. <strong>With none of these three set &mdash; the default &mdash; the app never checks for updates and never prompts</strong>, which is what you want until you have somewhere to send people.</td></tr>
+              <tr><td><code>attribution.enabled</code></td><td></td><td>Whether the small &ldquo;Powered by Stera&rdquo; credit shows in-app.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>The file has a schema attached, so your editor will autocomplete the
+          fields and show these descriptions inline.</p>
+      </section>
+
+      <!-- again -->
+      <section class="step" id="again">
+        <div class="step-head">
+          <span class="num">&mdash;</span>
+          <div>
+            <h2>Changing it later</h2>
+            <p class="sub">Edit and re-run. It handles rename-to-rename.</p>
+          </div>
+        </div>
+
+        <p>Edit <code>packages/brand/brand.json</code> and run <code>brand:apply</code>
+          again. It remembers what's currently applied, so a second run maps your
+          old name to your new one rather than getting confused about the
+          original. Re-running with nothing changed does nothing at all:</p>
+
+        <div class="term">
+          <div class="term-bar">
+            <span class="label">output</span>
+          </div>
+<pre><code>Nothing to change - the tree already matches packages/brand/brand.json.</code></pre>
+        </div>
+
+        <div class="note note--warn">
+          <span class="tag">If you have users</span>
+          <div>
+            <p>Three renames affect data already on people's phones: the local
+              database filename, the recording format's schema names, and saved
+              iOS folder bookmarks.</p>
+            <p>For a brand new fork this doesn't matter. If you're pushing an
+              update to an existing install base, say so during the interview and
+              those are left alone. Old recordings stay readable by default
+              either way.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- limits -->
+      <section class="step" id="limits">
+        <div class="step-head">
+          <span class="num">&mdash;</span>
+          <div>
+            <h2>What it won't do</h2>
+            <p class="sub">On purpose.</p>
+          </div>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>It won't</th><th>Because</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Touch your signing keys</td><td>The Apple team ID is blanked, not inherited. A build signed against someone else's team is worse than one that won't sign.</td></tr>
+              <tr><td>Write real secrets</td><td>Only <code>.env.example</code> files are touched. You fill in the real ones.</td></tr>
+              <tr><td>Remove the licence</td><td>Retaining the copyright notice is a condition of the licence, not a courtesy.</td></tr>
+              <tr><td>Run on uncommitted work</td><td>So a single <code>git checkout .</code> always undoes it.</td></tr>
+              <tr><td>Edit lockfiles as text</td><td><code>bun.lock</code> contains the word <em>sisteransi</em>. Find-and-replace would quietly corrupt it, so they're rebuilt instead.</td></tr>
+              <tr><td>Commit</td><td>Reviewing the diff is your call.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>You can turn off the in-app credit with
+          <code>attribution.enabled: false</code>. That hides the line in the
+          profile screen and nothing else &mdash; the licence and copyright notice
+          still have to stay.</p>
+      </section>
+
+      <!-- trouble -->
+      <section class="step" id="trouble">
+        <div class="step-head">
+          <span class="num">&mdash;</span>
+          <div>
+            <h2>If something goes wrong</h2>
+            <p class="sub">The four you're most likely to hit.</p>
+          </div>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>You see</th><th>Do this</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>dependencies are not installed</code></td>
+                <td>Run <code>bun install</code>. Without it, the image library resolves to a build that crashes partway through generating icons.</td>
+              </tr>
+              <tr>
+                <td><code>the working tree has N uncommitted change(s)</code></td>
+                <td>Commit or stash. This is the guard that keeps the rebrand undoable.</td>
+              </tr>
+              <tr>
+                <td><code>null cannot be cast to non-null type kotlin.String</code></td>
+                <td>Create <code>apps/mobile/android/key.properties</code>. Unrelated to the rebrand &mdash; a fresh clone does this too.</td>
+              </tr>
+              <tr>
+                <td><code>these generated files have been edited by hand</code></td>
+                <td>Move your change into <code>brand.json</code>, or pass <code>--force</code> to discard it. Files marked <em>do not edit</em> are checksummed.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>Start over entirely with <code>git checkout .</code> and
+          <code>rm packages/brand/.applied.json</code>.</p>
+      </section>
+
+      <footer class="foot">
+        <span>Powered by Stera &mdash; FPV Labs</span>
+        <span>Full reference: <code>packages/brand/README.md</code></span>
+      </footer>
+
+    </main>
+  </div>
+</div>
+
+<script>
+  // Copy buttons: take the sibling <pre>'s text, minus the prompt glyphs.
+  for (const button of document.querySelectorAll(".copy")) {
+    button.addEventListener("click", async () => {
+      const block = button.closest(".term").querySelector("pre");
+      const text = Array.from(block.querySelectorAll("code"))
+        .map((code) => code.innerText)
+        .join("\n")
+        .split("\n")
+        .map((line) => line.replace(/^[$>]\s+/, ""))
+        .join("\n")
+        .trim();
+      try {
+        await navigator.clipboard.writeText(text);
+        button.textContent = "Copied";
+        button.dataset.done = "1";
+      } catch {
+        button.textContent = "Press ⌘C";
+      }
+      setTimeout(() => {
+        button.textContent = "Copy";
+        delete button.dataset.done;
+      }, 1600);
+    });
+  }
+
+  // Highlight the rail entry for whichever section is currently in view.
+  const links = new Map();
+  for (const link of document.querySelectorAll(".rail a")) {
+    links.set(link.getAttribute("href").slice(1), link);
+  }
+
+  const seen = new Set();
+  const observer = new IntersectionObserver(
+    (entries) => {
+      for (const entry of entries) {
+        if (entry.isIntersecting) {
+          seen.add(entry.target.id);
+        } else {
+          seen.delete(entry.target.id);
+        }
+      }
+      let active = null;
+      for (const [id, link] of links) {
+        link.classList.remove("is-active");
+        if (active === null && seen.has(id)) {
+          active = link;
+        }
+      }
+      if (active !== null) {
+        active.classList.add("is-active");
+      }
+    },
+    { rootMargin: "-10% 0px -70% 0px" }
+  );
+
+  for (const id of links.keys()) {
+    const section = document.getElementById(id);
+    if (section !== null) {
+      observer.observe(section);
+    }
+  }
+</script>

@@ -1,0 +1,9 @@
+{
+  "name": "@stera/recorder",
+  "private": true,
+  "scripts": {
+    "lint": "flutter analyze",
+    "pub-get": "flutter pub get",
+    "clean": "flutter clean"
+  }
+}

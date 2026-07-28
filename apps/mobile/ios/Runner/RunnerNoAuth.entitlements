@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+	<dict>
+		<!--
+			Entitlements for a NO_AUTH_MODE build: deliberately empty.
+
+			The authed build declares com.apple.developer.applesignin (see
+			Runner.entitlements), which free/personal Apple developer teams cannot
+			provision — so with that entitlement the app will not sign onto a
+			device at all without a paid account. A no-auth build never calls Sign
+			in with Apple, so dropping the capability costs it nothing and is what
+			makes "clone the repo and run it" true on iOS.
+
+			Selected by STERA_CODE_SIGN_ENTITLEMENTS, which
+			tool/sync_ios_entitlements.dart writes into ios/Flutter/NoAuth.xcconfig
+			from .env. Do not add capabilities here — anything that needs one
+			belongs in the authed build.
+		-->
+	</dict>
+</plist>

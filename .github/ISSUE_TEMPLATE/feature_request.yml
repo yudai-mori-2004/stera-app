@@ -1,0 +1,50 @@
+name: feature request
+description: an idea for something new
+labels: ["enhancement"]
+body:
+  - type: dropdown
+    id: area
+    attributes:
+      label: where
+      options:
+        - apps/mobile (flutter app)
+        - apps/server (api)
+        - packages/stera_recorder (arkit / arcore capture)
+        - packages/brand (white-label engine)
+        - packages/db, auth, env, types
+        - deploy / build tooling
+        - not sure
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: what's the problem
+      description: what you were trying to do when you hit this
+    validations:
+      required: true
+
+  - type: textarea
+    id: idea
+    attributes:
+      label: what you'd want instead
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: what you tried
+      description: workarounds, other approaches, and why they didn't work
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: before you file
+      options:
+        - label: i searched existing issues
+          required: true
+        - label: >-
+            this is not a rebrand. `packages/brand` already handles name,
+            colours, type, shape, icons and identifiers via `brand.json`

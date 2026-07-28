@@ -1,0 +1,88 @@
+# Dependencies
+node_modules
+.pnp
+.pnp.js
+
+# Build outputs
+dist
+build
+*.tsbuildinfo
+
+# Environment variables (never commit real secrets)
+.env
+.env.*
+!.env.example
+!.env.*.example
+.env*.local
+
+# Credentials / signing material (repo-wide; mobile also lists these)
+*.p8
+*.p12
+*.pem
+*.keystore
+*.jks
+*.mobileprovision
+AuthKey*.p8
+credentials.json
+*-credentials.json
+service-account*.json
+google-services.json
+GoogleService-Info.plist
+key.properties
+
+# IDEs and editors
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.idea
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+.pnpm-debug.log*
+
+# Turbo
+.turbo
+.nx
+
+# Testing
+coverage
+.nyc_output
+
+# Misc
+*.tgz
+.cache
+tmp
+temp
+
+# Local scratch / drafts — never publish
+private/
+
+# Flutter / Dart (apps/mobile)
+**/.dart_tool/
+**/.flutter-plugins
+**/.flutter-plugins-dependencies
+**/.pub-cache/
+**/.pub/
+**/.symlinks/
+**/doc/api/
+**/ios/Flutter/.last_build_id
+**/ios/Pods/
+**/ios/.symlinks/
+**/android/.gradle/
+**/android/app/debug/
+**/android/app/profile/
+**/android/app/release/
+**/android/local.properties
+app.*.symbols
+app.*.map.json

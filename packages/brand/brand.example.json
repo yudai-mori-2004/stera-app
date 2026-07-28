@@ -1,0 +1,41 @@
+{
+  "$schema": "./brand.schema.json",
+
+  "brand": {
+    "name": "Acme Vision",
+    "tagline": "infra for spatial intelligence",
+    "legalEntity": "Acme Robotics, Inc."
+  },
+
+  "identifiers": {
+    "bundleId": "com.acmerobotics.vision"
+  },
+
+  "urls": {
+    "website": "https://acmerobotics.com",
+    "contactEmail": "hello@acmerobotics.com",
+    "sourceRepo": "https://github.com/acme-robotics/acme-vision",
+    "playStoreAppId": "com.acmerobotics.vision",
+    "appStoreId": "6501234567",
+    "updateFeed": null
+  },
+
+  "theme": {
+    "brandAccentLight": "#3D8AE8",
+    "tint": 0.5,
+    "shape": { "style": "rounded" }
+  },
+
+  "fonts": {
+    "display": "Inter",
+    "files": { "Inter": ["packages/brand/source/fonts/Inter.ttf"] }
+  },
+
+  "assets": {
+    "iconSource": "packages/brand/source/icon.png"
+  },
+
+  "attribution": {
+    "enabled": true
+  }
+}

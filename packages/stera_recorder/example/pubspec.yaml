@@ -1,0 +1,30 @@
+name: stera_recorder_example
+description: "Minimal example for the stera_recorder plugin."
+publish_to: "none"
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.9.2
+
+dependencies:
+  flutter:
+    sdk: flutter
+  # The recorder only checks whether camera access is granted — asking for it is
+  # the host app's job, which is what this dependency is here for.
+  permission_handler: ^11.0.1
+  stera_recorder:
+    path: ../
+
+dev_dependencies:
+  flutter_lints: ^6.0.0
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
+  config:
+    # ios/Runner.xcodeproj carries the Swift Package Manager integration, so this
+    # example builds through SwiftPM even when the machine's global
+    # `flutter config` has it off. Drop it to `false` (and `flutter clean`) to
+    # exercise the CocoaPods path in ios/stera_recorder.podspec instead.
+    enable-swift-package-manager: true

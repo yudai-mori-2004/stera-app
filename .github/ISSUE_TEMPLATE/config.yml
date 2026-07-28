@@ -1,0 +1,17 @@
+blank_issues_enabled: false
+contact_links:
+  - name: discord
+    url: https://www.fpvlabs.ai/discord
+    about: questions, setup help, and anything that isn't a bug report
+
+  - name: security issue
+    url: mailto:contact@fpvlabs.ai
+    about: do not open an issue. email contact@fpvlabs.ai
+
+  - name: docs
+    url: https://fpvlabs.ai/stera/docs
+    about: Stera docs, quickstart and api reference
+
+  - name: stera-sdk
+    url: https://github.com/fpv-labs/stera-sdk
+    about: the python side. reading, processing and exporting recordings

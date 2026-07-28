@@ -1,0 +1,13 @@
+# Your source artwork. Keep it out of the repo - `generated/` holds the
+# rasterised output, which is what the build actually consumes.
+source/
+
+# Placeholder monogram, written when no artwork is configured. Regenerated on
+# every run, so there is nothing to preserve.
+generated/icon_placeholder.svg
+
+# `bun run brand:preview` output. Regenerated from brand.json on demand, half a
+# megabyte of inlined fonts and artwork, and stale the moment the config moves -
+# three good reasons not to track it.
+preview.html
+preview-*.json

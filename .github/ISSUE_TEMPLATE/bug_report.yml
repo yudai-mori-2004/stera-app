@@ -1,0 +1,84 @@
+name: bug report
+description: something is broken
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        security issues do not go here. email contact@fpvlabs.ai instead.
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: where
+      options:
+        - apps/mobile (flutter app)
+        - apps/server (api)
+        - packages/stera_recorder (arkit / arcore capture)
+        - packages/brand (white-label engine)
+        - packages/db, auth, env, types
+        - deploy / build tooling
+        - not sure
+    validations:
+      required: true
+
+  - type: textarea
+    id: what
+    attributes:
+      label: what happened
+      description: what you expected, and what you got instead
+    validations:
+      required: true
+
+  - type: textarea
+    id: repro
+    attributes:
+      label: steps to reproduce
+      placeholder: |
+        1. ...
+        2. ...
+        3. ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: logs or stack trace
+      description: >-
+        `flutter run` output, server logs, or the failing command. pasted here it
+        gets formatted automatically, no backticks needed.
+      render: shell
+
+  - type: input
+    id: commit
+    attributes:
+      label: commit
+      description: output of `git rev-parse --short HEAD`
+    validations:
+      required: true
+
+  - type: textarea
+    id: env
+    attributes:
+      label: environment
+      description: >-
+        for app bugs, the device and os version. arkit and arcore behave
+        differently per device, and depth or mesh needs lidar, so this matters.
+      placeholder: |
+        device: iphone 15 pro, ios 18.2
+        host os: macos 15.2
+        flutter: 3.44.6-stable
+        bun: 1.3.14
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: before you file
+      options:
+        - label: i searched existing issues
+          required: true
+        - label: i'm on a physical device (arkit and arcore do not run in simulators)
+        - label: i ran `bun run check` and `flutter analyze`

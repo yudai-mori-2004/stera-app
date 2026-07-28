@@ -1,0 +1,18 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Camera for the ARCore session; the high-rate sensor permission is what
+         lets the IMU collector sample above 200 Hz. -->
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.HIGH_SAMPLING_RATE_SENSORS" />
+
+    <!-- ARCore features -->
+    <uses-feature android:name="android.hardware.camera.ar" android:required="false" />
+
+    <application>
+        <!-- ARCore integration (optional - the host app works without AR on
+             non-AR devices) -->
+        <meta-data
+            android:name="com.google.ar.core"
+            android:value="optional" />
+    </application>
+</manifest>

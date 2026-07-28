@@ -1,0 +1,15 @@
+[Unit]
+Description=Stera API Server
+After=network.target
+
+[Service]
+Type=simple
+User=ubuntu
+WorkingDirectory=/home/ubuntu/stera-open/apps/server
+ExecStart=/home/ubuntu/.bun/bin/bun run dist/index.mjs
+Restart=always
+RestartSec=10
+EnvironmentFile=/home/ubuntu/stera-open/apps/server/.env
+
+[Install]
+WantedBy=multi-user.target

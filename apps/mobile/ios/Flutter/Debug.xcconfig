@@ -1,0 +1,20 @@
+#include? "Pods/Target Support Files/Pods-Runner/Pods-Runner.debug.xcconfig"
+#include "Generated.xcconfig"
+
+// Defaults for the settings `tool/sync_ios_config.dart` writes into the
+// git-ignored Local.xcconfig from .env. The optional include comes last so it
+// can override them — and so a missing file leaves these standing, meaning a
+// fresh clone signs with the full entitlements and carries the same Google
+// URL-scheme placeholder that is committed in Info.plist.
+// Signing is per-developer and must never be committed: DEVELOPMENT_TEAM is an
+// Apple account identifier and the bundle id has to be unique per publisher.
+// Defaults here are the repo's neutral values; set IOS_DEVELOPMENT_TEAM and
+// IOS_BUNDLE_ID in .env instead of editing Xcode's Signing tab, or Xcode will
+// write your identity straight back into the tracked project file.
+STERA_CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements
+STERA_DEVELOPMENT_TEAM =
+STERA_BUNDLE_ID = com.fpvlabs.fpvlabs
+STERA_CODE_SIGN_STYLE = Manual
+STERA_PROVISIONING_PROFILE =
+GOOGLE_REVERSED_CLIENT_ID = com.googleusercontent.apps.your-ios-client-id
+#include? "Local.xcconfig"

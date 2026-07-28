@@ -1,0 +1,488 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/fpv-labs/stera-app/packages/brand/brand.schema.json",
+  "title": "White-label brand configuration",
+  "description": "Input to `bun run brand:apply`. Only brand.name, identifiers.bundleId, urls.website, urls.contactEmail and urls.sourceRepo are required; everything else is derived. Derived values are written back to this file so it stays a complete snapshot, but they are recomputed on every run.",
+  "type": "object",
+  "required": ["brand", "identifiers", "urls"],
+  "additionalProperties": false,
+
+  "properties": {
+    "$schema": { "type": "string" },
+    "engineVersion": { "type": "integer", "minimum": 1 },
+
+    "brand": {
+      "type": "object",
+      "required": ["name"],
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Product name as shown to users, e.g. \"Acme Vision\". Everything else defaults from this."
+        },
+        "shortName": {
+          "type": "string",
+          "description": "Space-constrained form, e.g. the launcher label. Defaults to the first word of `name`."
+        },
+        "slug": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+          "description": "Kebab-case identifier. Defaults to a slug of `name`. Drives the npm scope, repo name, systemd unit and R2 buckets."
+        },
+        "tagline": { "type": "string" },
+        "legalEntity": {
+          "type": "string",
+          "description": "Company name, used in the splash subtitle and attribution. Defaults to `name`."
+        },
+        "copyrightYear": { "type": "integer", "minimum": 2000, "maximum": 2200 }
+      }
+    },
+
+    "identifiers": {
+      "type": "object",
+      "required": ["bundleId"],
+      "additionalProperties": false,
+      "properties": {
+        "bundleId": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9]*(\\.[a-z][a-z0-9]*)+$",
+          "description": "Reverse-DNS application id, e.g. \"com.acmerobotics.vision\". Becomes the Android applicationId, the iOS PRODUCT_BUNDLE_IDENTIFIER and the Play Store id - upstream has three different values here and the rebrand collapses them to one."
+        },
+        "androidApplicationId": { "type": "string" },
+        "androidNamespace": { "type": "string" },
+        "kotlinPackage": {
+          "type": "string",
+          "description": "Defaults to `bundleId` with keyword-unsafe segments escaped."
+        },
+        "dartPackage": {
+          "type": "string",
+          "pattern": "^[a-z_][a-z0-9_]*$",
+          "description": "Flutter package name. Defaults to a snake_case slug. Renaming this rewrites ~940 imports."
+        },
+        "npmScope": { "type": "string", "pattern": "^@[a-z0-9-]+$" },
+        "repoName": { "type": "string" },
+        "recorder": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "rename": { "type": "boolean", "default": true },
+            "dartPackage": { "type": "string", "pattern": "^[a-z_][a-z0-9_]*$" },
+            "kotlinPackage": { "type": "string" },
+            "pluginClass": { "type": "string", "pattern": "^[A-Z][A-Za-z0-9]*$" },
+            "podName": { "type": "string" },
+            "swiftObjcTarget": { "type": "string" },
+            "examplePackage": { "type": "string" },
+            "exampleIosBundleId": { "type": "string" }
+          }
+        },
+        "mcapSchemaNamespace": {
+          "type": "string",
+          "description": "Namespace for custom ROS2 schemas in recorded .mcap files. Changing it is a data-format change; see `compat.keepMcapAliases`."
+        },
+        "mcapWriterLibrary": { "type": "string" },
+        "driftDatabaseName": {
+          "type": "string",
+          "description": "On-disk sqlite filename. Changing it means existing installs start with an empty database."
+        },
+        "bookmarkKeyPrefix": {
+          "type": "string",
+          "description": "iOS security-scoped bookmark key prefix. Changing it invalidates saved folder bookmarks."
+        },
+        "systemdServiceName": { "type": "string" },
+        "deployDirName": { "type": "string" },
+        "r2Bucket": { "type": "string" },
+        "r2BucketProd": { "type": "string" }
+      }
+    },
+
+    "urls": {
+      "type": "object",
+      "required": ["website", "contactEmail", "sourceRepo"],
+      "additionalProperties": false,
+      "properties": {
+        "website": { "type": "string", "format": "uri" },
+        "termsAndConditions": { "type": "string", "format": "uri" },
+        "privacyPolicy": { "type": "string", "format": "uri" },
+        "contactEmail": { "type": "string", "format": "email" },
+        "discordInvite": { "type": ["string", "null"], "format": "uri" },
+        "sourceRepo": {
+          "type": "string",
+          "format": "uri",
+          "description": "Your fork's repository. The in-app \"view source\" link points here."
+        },
+        "apiHostDev": { "type": "string" },
+        "apiHostProd": { "type": "string" },
+        "playStoreAppId": {
+          "type": ["string", "null"],
+          "description": "Play Store listing id, if you have published there. Must equal identifiers.androidApplicationId - the in-app updater looks the listing up by the running app's own id. Null (the default) leaves Android update checks off."
+        },
+        "appStoreId": {
+          "type": ["string", "null"],
+          "description": "App Store numeric id, if you have published there. Null (the default) leaves iOS update checks off."
+        },
+        "updateFeed": {
+          "type": ["string", "null"],
+          "format": "uri",
+          "description": "A Sparkle-style appcast XML feed describing your releases. Takes precedence over the store ids on both platforms - use it when you ship outside the stores. Null (the default) means no feed."
+        }
+      }
+    },
+
+    "reference": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "description": "What this brand was matched against: a marketing site, a design system, a brand kit. Records nothing the engine acts on - it exists so the next run, and the next maintainer, can see that the greys were tuned to a specific reference rather than picked. Without it that reasoning evaporates the moment the conversation ends, and the next person re-derives the palette from the logo and quietly undoes the match.",
+      "properties": {
+        "url": { "type": "string", "description": "The site, design system or file the tokens were read from." },
+        "kind": {
+          "enum": ["site", "design-system", "brand-kit", "screenshot", "other"]
+        },
+        "capturedAt": {
+          "type": "string",
+          "description": "ISO date the reference was read. A live site drifts; this says how stale the match may be."
+        },
+        "notes": {
+          "type": "string",
+          "description": "What was matched and what could not be - \"accent from --color-primary, tint 0.45 for their warm off-white; their gradients and illustration have no equivalent here\"."
+        }
+      }
+    },
+
+    "apple": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "developmentTeam": {
+          "type": ["string", "null"],
+          "description": "Apple Developer team id. Left null on purpose - the engine blanks the upstream team rather than leaving your build signed against someone else's."
+        },
+        "signInServiceId": { "type": "string" },
+        "backgroundTaskPrefix": { "type": "string" }
+      }
+    },
+
+    "theme": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "brandAccentLight": { "$ref": "#/$defs/colour" },
+        "brandAccentDark": { "$ref": "#/$defs/colour" },
+        "launchBackgroundLight": { "$ref": "#/$defs/colour" },
+        "launchBackgroundDark": { "$ref": "#/$defs/colour" },
+        "launchForegroundLight": { "$ref": "#/$defs/colour" },
+        "launchForegroundDark": { "$ref": "#/$defs/colour" },
+        "tint": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "How much of the accent bleeds into the neutral surfaces, borders and muted text. 0 (the default) keeps upstream's greys exactly; 1 mixes up to 14% of the accent into the page background. This is the knob that makes one hex visibly re-skin the app rather than recolour a badge. Semantic colours (red, green, blue) and the black/white anchors never take tint."
+        },
+        "allowLowContrast": {
+          "type": "boolean",
+          "description": "Ship a palette whose contrast is worse than upstream's and below WCAG AA. Off by default: a tint that walks body text below AA is a regression, and it is invisible on the screen of whoever chose the colour. Run `bun run brand:preview` to see the grades."
+        },
+        "overrides": {
+          "type": "object",
+          "description": "Pin any named token on class C in apps/mobile/lib/src/core/theme/colors.dart. Applied after the tint, so this is the one sanctioned place to disagree with the derivation. An unknown token name is an error - it used to generate a constant nothing read.",
+          "additionalProperties": {
+            "type": "object",
+            "required": ["light", "dark"],
+            "properties": {
+              "light": { "$ref": "#/$defs/colour" },
+              "dark": { "$ref": "#/$defs/colour" }
+            }
+          }
+        },
+        "space": {
+          "type": "object",
+          "additionalProperties": false,
+          "description": "The spacing scale - how much air the product has. Density survives a palette swap: two apps sharing a colour, a corner radius and a typeface still read as different products when one breathes and the other is packed. Every gap and pad in the app is on this scale.",
+          "properties": {
+            "style": {
+              "enum": ["tight", "default", "comfortable"],
+              "description": "tight is roughly 0.75x upstream, comfortable roughly 1.25x, rounded to whole pixels at each step. `default` reproduces the literals already in the widget tree, so leaving this alone is a no-op on every pixel."
+            },
+            "scale": {
+              "type": "object",
+              "additionalProperties": false,
+              "description": "Override individual steps of the chosen density, in logical pixels. The `*Plus` steps are the half-steps between the named ones, and exist because the widget tree genuinely uses 6, 10, 14, 20 and 28 - leaving them off the scale would mean those gaps stopped following the brand.",
+              "properties": {
+                "none": { "type": "number", "minimum": 0 },
+                "xxs": { "type": "number", "minimum": 0 },
+                "xs": { "type": "number", "minimum": 0 },
+                "xsPlus": { "type": "number", "minimum": 0 },
+                "sm": { "type": "number", "minimum": 0 },
+                "smPlus": { "type": "number", "minimum": 0 },
+                "md": { "type": "number", "minimum": 0 },
+                "mdPlus": { "type": "number", "minimum": 0 },
+                "lg": { "type": "number", "minimum": 0 },
+                "lgPlus": { "type": "number", "minimum": 0 },
+                "xl": { "type": "number", "minimum": 0 },
+                "xlPlus": { "type": "number", "minimum": 0 },
+                "xxl": { "type": "number", "minimum": 0 },
+                "huge": { "type": "number", "minimum": 0 }
+              }
+            }
+          }
+        },
+
+        "type": {
+          "type": "object",
+          "additionalProperties": false,
+          "description": "The typographic scale. `fonts.*` picks the typefaces; this decides how big they are, how tightly they are set and how heavy they run. Changing the family alone leaves a fork at upstream's exact ramp, which is the most convincing way to look rebranded without being it.",
+          "properties": {
+            "style": {
+              "enum": ["compact", "default", "spacious"],
+              "description": "compact tightens the ramp and the leading, default is upstream, spacious opens both. Every TextStyle in the app is built from the chosen table."
+            },
+            "scale": {
+              "type": "object",
+              "additionalProperties": false,
+              "description": "Override individual steps of the chosen style. Both measures are logical pixels; `lineHeight` is absolute, not a multiplier, and is converted to Flutter's ratio at generation. Either key may be given alone.",
+              "properties": {
+                "xs": { "$ref": "#/$defs/typeStep" },
+                "sm": { "$ref": "#/$defs/typeStep" },
+                "md": { "$ref": "#/$defs/typeStep" },
+                "lg": { "$ref": "#/$defs/typeStep" },
+                "xl": { "$ref": "#/$defs/typeStep" },
+                "xl2": { "$ref": "#/$defs/typeStep" },
+                "xl3": { "$ref": "#/$defs/typeStep" },
+                "xl3Plus": {
+                  "$ref": "#/$defs/typeStep",
+                  "description": "The half-step the app's page titles sit on. It exists so those titles follow the brand instead of being the two headings that do not."
+                },
+                "xl4": { "$ref": "#/$defs/typeStep" }
+              }
+            },
+            "weights": {
+              "type": "object",
+              "additionalProperties": false,
+              "description": "The four weights the widget tree uses, by role. A reference that runs light or heavy is expressed here and reaches every label at once. Must be multiples of 100 - Flutter has no FontWeight in between, and a 550 would round to a neighbour without telling you.",
+              "properties": {
+                "regular": { "$ref": "#/$defs/fontWeight" },
+                "medium": { "$ref": "#/$defs/fontWeight" },
+                "semibold": { "$ref": "#/$defs/fontWeight" },
+                "bold": { "$ref": "#/$defs/fontWeight" }
+              }
+            }
+          }
+        },
+
+        "shape": {
+          "type": "object",
+          "additionalProperties": false,
+          "description": "The corner-radius scale, which is most of what makes two apps look like different products rather than one app in two colours.",
+          "properties": {
+            "style": {
+              "enum": ["sharp", "soft", "rounded", "pill"],
+              "description": "sharp 0-8px, soft 4-24px (upstream, the default), rounded 6-32px, pill 8-44px. Every radius in the app is on this scale, so the style reaches the whole product."
+            },
+            "scale": {
+              "type": "object",
+              "additionalProperties": false,
+              "description": "Override individual steps of the chosen style, in logical pixels. The *Plus steps are the half-steps between the named ones.",
+              "properties": {
+                "hairline": { "type": "number", "minimum": 0 },
+                "xs": { "type": "number", "minimum": 0 },
+                "xsPlus": { "type": "number", "minimum": 0 },
+                "sm": { "type": "number", "minimum": 0 },
+                "smPlus": { "type": "number", "minimum": 0 },
+                "md": { "type": "number", "minimum": 0 },
+                "mdPlus": { "type": "number", "minimum": 0 },
+                "lg": { "type": "number", "minimum": 0 },
+                "lgPlus": { "type": "number", "minimum": 0 },
+                "xl": { "type": "number", "minimum": 0 },
+                "xlPlus": { "type": "number", "minimum": 0 },
+                "full": {
+                  "type": "number",
+                  "minimum": 0,
+                  "description": "Sentinel for \"circle or stadium\". Leave at 999 unless you know why you are changing it."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "fonts": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "The four typeface roles. Naming a family that is neither bundled nor supplied under `files` is an error, because Flutter renders an unknown family as the system face without reporting anything.",
+      "properties": {
+        "display": {
+          "type": "string",
+          "description": "Headlines and the splash wordmark. Default EBGaramond."
+        },
+        "body": {
+          "type": "string",
+          "description": "Body copy and UI labels - by far the most used. Default Geist."
+        },
+        "mono": {
+          "type": "string",
+          "description": "Numerals, timestamps, identifiers. Default GeistMono."
+        },
+        "accent": {
+          "type": "string",
+          "description": "The character face, used sparingly for large display numerals. Default Handjet."
+        },
+        "files": {
+          "type": "object",
+          "description": "Family name -> the font files to bundle for it. Required for any family not already in apps/mobile/pubspec.yaml. Files are copied into apps/mobile/assets/fonts/ and declared in the pubspec.",
+          "additionalProperties": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "oneOf": [
+                {
+                  "type": "string",
+                  "description": "Repo-relative path to a .ttf or .otf, e.g. packages/brand/source/fonts/Inter.ttf"
+                },
+                {
+                  "type": "object",
+                  "required": ["path"],
+                  "additionalProperties": false,
+                  "properties": {
+                    "path": { "type": "string" },
+                    "weight": {
+                      "type": ["integer", "null"],
+                      "minimum": 1,
+                      "maximum": 1000,
+                      "description": "Omit for a variable font."
+                    },
+                    "style": { "enum": ["normal", "italic"] }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "replaceBundled": {
+          "type": "boolean",
+          "description": "Delete the upstream typefaces that no declared family still uses. Set true if you cannot redistribute them under your own brand."
+        }
+      }
+    },
+
+    "assets": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "iconSource": {
+          "type": ["string", "null"],
+          "description": "Repo-relative path to a square PNG (>=512px, 1024 preferred) or an SVG. All launcher icon densities are generated from it. Null means a placeholder monogram is used."
+        },
+        "iconForeground": { "type": ["string", "null"] },
+        "iconBackgroundColor": { "$ref": "#/$defs/colour" },
+        "iconMonochrome": {
+          "type": ["string", "null"],
+          "description": "Android 13+ themed-icon layer. Derived from the foreground when absent, but hand-drawn is much better."
+        },
+        "logoLight": {
+          "type": ["string", "null"],
+          "description": "The mark shown *inside* the app: splash screen, sign-in sheet, onboarding modal, iOS launch screen. Defaults to iconForeground, then iconSource - so supplying only an icon no longer leaves upstream's logo on those screens."
+        },
+        "logoDark": {
+          "type": ["string", "null"],
+          "description": "Dark-mode variant. Defaults to the same artwork as logoLight, which is fine for a mark that works on both and invisible for one that does not - `bun run brand:preview` renders it on both backgrounds."
+        },
+        "splashTexture": { "type": ["string", "null"] }
+      }
+    },
+
+    "copy": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "appName": { "type": "string" },
+        "appNameShort": { "type": "string" },
+        "appTitle": { "type": "string" },
+        "splashTitle": { "type": "string" },
+        "splashSubtitle": { "type": "string" },
+        "loginTagline": { "type": "string" },
+        "iosUsageDescriptions": {
+          "type": "object",
+          "description": "The six permission prompts iOS shows the user. Defaults are built from the app name.",
+          "additionalProperties": false,
+          "properties": {
+            "camera": { "type": "string" },
+            "motion": { "type": "string" },
+            "photoLibrary": { "type": "string" },
+            "photoLibraryAdd": { "type": "string" },
+            "microphone": { "type": "string" },
+            "speechRecognition": { "type": "string" }
+          }
+        }
+      }
+    },
+
+    "attribution": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Credit to the upstream project. Disabling this does not remove your obligation to retain LICENSE and the upstream copyright notice.",
+      "properties": {
+        "enabled": { "type": "boolean", "default": true },
+        "upstreamName": { "type": "string" },
+        "upstreamOrg": { "type": "string" },
+        "upstreamRepo": { "type": "string", "format": "uri" },
+        "text": { "type": "string" },
+        "showInProfileFooter": { "type": "boolean" },
+        "showInReadme": { "type": "boolean" },
+        "showInAttributionFile": { "type": "boolean" },
+        "showInMcapMetadata": { "type": "boolean" }
+      }
+    },
+
+    "compat": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Choices that trade compatibility with data written by the pre-rebrand app. All three are harmless for a fresh fork and destructive for an update-in-place.",
+      "properties": {
+        "keepMcapAliases": {
+          "type": "boolean",
+          "default": true,
+          "description": "Keep decoding the previous namespace's MCAP schemas, so recordings made before the rebrand still open."
+        },
+        "renameDriftDatabase": { "type": "boolean", "default": true },
+        "renameBookmarkPrefix": { "type": "boolean", "default": true }
+      }
+    },
+
+    "legacy": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Set by the engine, not by hand.",
+      "properties": {
+        "iosBundleId": { "type": "string" },
+        "playStoreAppId": { "type": "string" }
+      }
+    }
+  },
+
+  "$defs": {
+    "typeStep": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "size": { "type": "number", "exclusiveMinimum": 0 },
+        "lineHeight": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "description": "Absolute logical pixels, e.g. 24 for \"24px on a 16px face\"."
+        }
+      }
+    },
+    "fontWeight": {
+      "type": "integer",
+      "minimum": 100,
+      "maximum": 900,
+      "multipleOf": 100
+    },
+    "colour": {
+      "type": "string",
+      "pattern": "^(#?[0-9A-Fa-f]{6}|#?[0-9A-Fa-f]{8}|0[xX][0-9A-Fa-f]{8})$",
+      "description": "\"#RRGGBB\", \"#RRGGBBAA\" or Flutter's \"0xAARRGGBB\"."
+    }
+  }
+}

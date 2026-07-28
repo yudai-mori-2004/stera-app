@@ -1,0 +1,45 @@
+name: stera_recorder
+description: >-
+  ARKit and ARCore capture for Flutter, recorded straight to an MCAP dataset:
+  RGB video, depth, point cloud, mesh and IMU, with session state ready to bind
+  to your own UI.
+version: 0.0.2
+repository: https://github.com/fpv-labs/stera-app
+issue_tracker: https://github.com/fpv-labs/stera-app/issues
+documentation: https://github.com/fpv-labs/stera-app/blob/main/packages/stera_recorder/README.md
+topics:
+  - ar
+  - arkit
+  - arcore
+  - recording
+  - mcap
+
+environment:
+  sdk: ^3.9.2
+  flutter: ">=3.10.0"
+
+dependencies:
+  audioplayers: ^6.1.0
+  battery_plus: ^7.1.1
+  ffi: ^2.2.0
+  flutter:
+    sdk: flutter
+  objective_c: ^9.1.0
+  speech_to_text: ^7.4.0
+
+dev_dependencies:
+  ffigen: ^20.1.1
+  flutter_lints: ^6.0.0
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  assets:
+    - assets/sounds/
+  plugin:
+    platforms:
+      android:
+        package: open.fpvlabs.stera.ar_recorder
+        pluginClass: SteraRecorderPlugin
+      ios:
+        pluginClass: SteraRecorderPlugin

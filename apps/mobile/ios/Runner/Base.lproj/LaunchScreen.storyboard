@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="EHf-IW-A2E">
+            <objects>
+                <viewController id="01J-lp-oVM" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Ydg-fD-yQy"/>
+                        <viewControllerLayoutGuide type="bottom" id="xbc-2k-c8Z"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" image="SplashTexture" translatesAutoresizingMaskIntoConstraints="NO" id="TxB-0r-Te0"/>
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" image="LaunchLogo" translatesAutoresizingMaskIntoConstraints="NO" id="Lgo-fp-v01">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="84" id="Lgo-wd-001"/>
+                                    <constraint firstAttribute="height" constant="84" id="Lgo-ht-002"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Stera" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ste-la-bl1">
+                                <fontDescription key="fontDescription" type="custom" pointSize="18" name="EBGaramond-Regular"/>
+                                <color key="textColor" name="LaunchForeground"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="by FPV Labs" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fpv-la-bl2">
+                                <fontDescription key="fontDescription" type="custom" pointSize="8" name="Geist-Regular"/>
+                                <color key="textColor" name="LaunchForeground"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" name="LaunchBackground"/>
+                        <constraints>
+                            <constraint firstItem="TxB-0r-Te0" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="Txb-tp-001"/>
+                            <constraint firstItem="TxB-0r-Te0" firstAttribute="bottom" secondItem="Ze5-6b-2t3" secondAttribute="bottom" id="Txb-bt-002"/>
+                            <constraint firstItem="TxB-0r-Te0" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="Txb-ld-003"/>
+                            <constraint firstItem="TxB-0r-Te0" firstAttribute="trailing" secondItem="Ze5-6b-2t3" secondAttribute="trailing" id="Txb-tr-004"/>
+                            <constraint firstItem="Lgo-fp-v01" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="Lgo-cx-003"/>
+                            <constraint firstItem="Lgo-fp-v01" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="Lgo-cy-004"/>
+                            <constraint firstItem="Ste-la-bl1" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="Ste-cx-005"/>
+                            <constraint firstItem="Fpv-la-bl2" firstAttribute="top" secondItem="Ste-la-bl1" secondAttribute="bottom" constant="2" id="Ste-bt-006"/>
+                            <constraint firstItem="Fpv-la-bl2" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="Fpv-cx-007"/>
+                            <constraint firstItem="Ze5-6b-2t3" firstAttribute="bottom" secondItem="Fpv-la-bl2" secondAttribute="bottom" constant="48" id="Fpv-bt-008"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="53" y="375"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="SplashTexture" width="1560" height="3376"/>
+        <image name="LaunchLogo" width="120" height="120"/>
+        <namedColor name="LaunchForeground">
+            <color red="0.094117647058823528" green="0.09803921568627451" blue="0.10588235294117647" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="LaunchBackground">
+            <color red="0.96862745098039216" green="0.9568627450980393" blue="0.9294117647058824" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>
