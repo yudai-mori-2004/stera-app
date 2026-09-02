@@ -1,0 +1,97 @@
+{
+  "$schema": "./brand.schema.json",
+  "brand": {
+    "name": "RootLens",
+    "shortName": "RootLens",
+    "slug": "rootlens",
+    "tagline": "Egocentric data capture for embodied AI",
+    "legalEntity": "RootLens",
+    "copyrightYear": 2026
+  },
+  "identifiers": {
+    "bundleId": "io.rootlens.app",
+    "androidApplicationId": "io.rootlens.app",
+    "androidNamespace": "io.rootlens.app",
+    "kotlinPackage": "io.rootlens.app",
+    "dartPackage": "stera",
+    "npmScope": "@stera",
+    "repoName": "stera-open",
+    "recorder": {
+      "rename": false,
+      "dartPackage": "stera_recorder",
+      "kotlinPackage": "open.fpvlabs.stera.ar_recorder",
+      "pluginClass": "SteraRecorderPlugin",
+      "podName": "stera_recorder",
+      "swiftObjcTarget": "stera_recorder_objc",
+      "examplePackage": "open.fpvlabs.stera_recorder_example",
+      "exampleIosBundleId": "open.fpvlabs.steraRecorderExample"
+    },
+    "mcapSchemaNamespace": "stera",
+    "mcapWriterLibrary": "fpv_labs/1.0",
+    "driftDatabaseName": "stera",
+    "bookmarkKeyPrefix": "open.fpvlabs.stera.bookmark.",
+    "systemdServiceName": "stera-server",
+    "deployDirName": "stera-open",
+    "r2Bucket": "stera-uploads",
+    "r2BucketProd": "stera-uploads-prod"
+  },
+  "urls": {
+    "website": "https://rootlens.io",
+    "termsAndConditions": "https://rootlens.io/terms",
+    "privacyPolicy": "https://rootlens.io/privacy",
+    "contactEmail": "contact@rootlens.io",
+    "discordInvite": null,
+    "sourceRepo": "https://github.com/yudai-mori-2004/stera-app",
+    "apiHostDev": "app-dev.rootlens.io",
+    "apiHostProd": "app.rootlens.io",
+    "playStoreAppId": null,
+    "appStoreId": null,
+    "updateFeed": null
+  },
+  "apple": {
+    "developmentTeam": "7Q2XWNS477",
+    "signInServiceId": "io.rootlens.app.signin",
+    "backgroundTaskPrefix": "io.rootlens.app"
+  },
+  "theme": {
+    "brandAccentLight": "#25528E",
+    "tint": 0,
+    "shape": {
+      "style": "soft"
+    },
+    "type": {
+      "style": "default"
+    },
+    "space": {
+      "style": "default"
+    }
+  },
+  "assets": {
+    "iconSource": "packages/brand/source/icon.png",
+    "iconBackgroundColor": "#FFFFFF"
+  },
+  "copy": {
+    "appName": "RootLens",
+    "appNameShort": "RootLens",
+    "appTitle": "RootLens",
+    "splashTitle": "RootLens",
+    "splashSubtitle": "Powered by Stera",
+    "loginTagline": "Egocentric data capture for embodied AI"
+  },
+  "attribution": {
+    "enabled": true,
+    "upstreamName": "Stera",
+    "upstreamOrg": "FPV Labs",
+    "upstreamRepo": "https://github.com/fpv-labs/stera-app",
+    "text": "Powered by Stera",
+    "showInProfileFooter": true,
+    "showInReadme": true,
+    "showInAttributionFile": true,
+    "showInMcapMetadata": true
+  },
+  "compat": {
+    "keepMcapAliases": true,
+    "renameDriftDatabase": false,
+    "renameBookmarkPrefix": false
+  }
+}
