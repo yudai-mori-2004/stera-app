@@ -11,7 +11,7 @@ void main() {
         GoRoute(
           path: "/home",
           builder: (_, _) => const Scaffold(
-            appBar: AppHeader(text1: "Stera", text2: ""),
+            appBar: AppHeader(text1: "RootLens", text2: ""),
             body: SizedBox.shrink(),
           ),
           routes: [
@@ -56,6 +56,6 @@ void main() {
 
     // No back button, so the title starts at the default inset rather than
     // flush against the leading edge.
-    expect(tester.getTopLeft(find.text("Stera")).dx, 16);
+    expect(tester.getTopLeft(find.text("RootLens")).dx, 16);
   });
 }

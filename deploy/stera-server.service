@@ -1,5 +1,5 @@
 [Unit]
-Description=Stera API Server
+Description=RootLens API Server
 After=network.target
 
 [Service]

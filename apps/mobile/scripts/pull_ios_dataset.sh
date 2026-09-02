@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-BUNDLE_ID="${BUNDLE_ID:-open.fpvlabs.stera}"
+BUNDLE_ID="${BUNDLE_ID:-io.rootlens.app}"
 LOCAL_ROOT="${LOCAL_ROOT:-./logs/ios_sessions}"
 
 usage() {
@@ -16,7 +16,7 @@ Options:
   --help, -h     Show this help
 
 Environment overrides:
-  BUNDLE_ID=open.fpvlabs.stera
+  BUNDLE_ID=io.rootlens.app
   LOCAL_ROOT=./logs/ios_sessions
 
 Prerequisites:

@@ -1,6 +1,6 @@
 {
-  "name": "FPV Labs",
-  "short_name": "FPV Labs",
+  "name": "RootLens",
+  "short_name": "RootLens",
   "start_url": ".",
   "display": "standalone",
   "background_color": "#0175C2",

@@ -11,7 +11,7 @@ import SQLite3
 
 final class JournalDatabase: JournalStatementBinding {
     private var db: OpaquePointer?
-    private let queue = DispatchQueue(label: "open.fpvlabs.stera.uploadJournal")
+    private let queue = DispatchQueue(label: "io.rootlens.app.uploadJournal")
 
     init(path: URL? = nil) {
         let url = path ?? JournalDatabase.defaultPath()

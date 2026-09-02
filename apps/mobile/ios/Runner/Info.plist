@@ -12,7 +12,7 @@
 		<key>CFBundleDevelopmentRegion</key>
 		<string>$(DEVELOPMENT_LANGUAGE)</string>
 		<key>CFBundleDisplayName</key>
-		<string>Stera</string>
+		<string>RootLens</string>
 		<key>CFBundleExecutable</key>
 		<string>$(EXECUTABLE_NAME)</string>
 		<key>CFBundleIdentifier</key>
@@ -20,7 +20,7 @@
 		<key>CFBundleInfoDictionaryVersion</key>
 		<string>6.0</string>
 		<key>CFBundleName</key>
-		<string>Stera</string>
+		<string>RootLens</string>
 		<key>CFBundlePackageType</key>
 		<string>APPL</string>
 		<key>CFBundleShortVersionString</key>
@@ -43,21 +43,17 @@
 			</dict>
 		</array>
 		<key>NSMotionUsageDescription</key>
-		<string>FPV Labs uses motion sensors (accelerometer and gyroscope) to capture IMU data
-			during AR recording for spatial AI training.</string>
+		<string>RootLens uses motion sensors (accelerometer and gyroscope) to capture IMU data during AR recording for spatial AI training.</string>
 		<key>NSMicrophoneUsageDescription</key>
 		<string>Voice commands are used to control recording hands-free.</string>
 		<key>NSSpeechRecognitionUsageDescription</key>
 		<string>Voice commands are used to control recording hands-free.</string>
 		<key>NSCameraUsageDescription</key>
-		<string>FPV Labs uses your camera to record and capture high-quality video for spatial AI
-			training. Only when you provide consent.</string>
+		<string>RootLens uses your camera to record and capture high-quality video for spatial AI training. Only when you provide consent.</string>
 		<key>NSPhotoLibraryAddUsageDescription</key>
-		<string>FPV Labs needs permission to save your recorded and processed videos to your
-			gallery.</string>
+		<string>RootLens needs permission to save your recorded and processed videos to your gallery.</string>
 		<key>NSPhotoLibraryUsageDescription</key>
-		<string>FPV Labs needs access to your photo library to select and upload videos for spatial
-			AI training.</string>
+		<string>RootLens needs access to your photo library to select and upload videos for spatial AI training.</string>
 		<key>UIFileSharingEnabled</key>
 		<true />
 		<key>LSSupportsOpeningDocumentsInPlace</key>
@@ -92,7 +88,7 @@
 		</array>
 		<key>BGTaskSchedulerPermittedIdentifiers</key>
 		<array>
-			<string>open.fpvlabs.stera.upload.finalize</string>
+			<string>io.rootlens.app.upload.finalize</string>
 		</array>
 		<key>UIAppFonts</key>
 		<array>

@@ -25,9 +25,9 @@ import Foundation
 public final class ChunkWindowManager: NSObject, ChunkWindowManaging {
   public static let shared = ChunkWindowManager()
 
-  private static let sessionIdentifier = "open.fpvlabs.stera.iosWindowedUploader"
+  private static let sessionIdentifier = "io.rootlens.app.iosWindowedUploader"
   /// BGProcessingTask id — must match Info.plist BGTaskSchedulerPermittedIdentifiers.
-  public static let backgroundTaskIdentifier = "open.fpvlabs.stera.upload.finalize"
+  public static let backgroundTaskIdentifier = "io.rootlens.app.upload.finalize"
   /// Don't start a part whose URL would expire mid-transfer.
   private static let urlFreshnessMargin: TimeInterval = 120
 
@@ -67,7 +67,7 @@ public final class ChunkWindowManager: NSObject, ChunkWindowManaging {
     }
   }
 
-  private let workQueue = DispatchQueue(label: "open.fpvlabs.stera.windowManager")
+  private let workQueue = DispatchQueue(label: "io.rootlens.app.windowManager")
 
   /// Sessions that have asked Dart for more presigned URLs (`needUrls`) and are
   /// awaiting a `provideUrls` answer. Prevents re-emitting `needUrls` on every

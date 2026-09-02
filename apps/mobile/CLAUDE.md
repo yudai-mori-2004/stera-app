@@ -6,7 +6,7 @@
 - `lib/src/modules/<feature>/` — feature code (`data/`, `providers/`, `ui/`, `view_models/`)
 - `lib/src/services/<service>/` — cross-cutting services (api, db, upload, ar_recorder, …)
 - `ios/Runner/<module>/` — Swift native modules
-- `android/app/src/main/kotlin/open/fpvlabs/stera/<module>/` — Kotlin native modules
+- `android/app/src/main/kotlin/io/rootlens/app/<module>/` — Kotlin native modules
 
 The AR recorder is **not** in this app: it lives in the `stera_recorder` plugin
 (`packages/stera_recorder`), which owns its Dart API, its Swift/Kotlin code, its

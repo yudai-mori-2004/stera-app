@@ -7,13 +7,13 @@ import UniformTypeIdentifiers
 public class SecurityScopedURLHelperImpl {
     
     /// UserDefaults key prefix for storing bookmarks
-    private let bookmarkKeyPrefix = "open.fpvlabs.stera.bookmark."
+    private let bookmarkKeyPrefix = "io.rootlens.app.bookmark."
     
     /// Track URLs currently being accessed (thread-safe)
     private var accessingURLs: Set<String> = []
     
     /// Serial queue for thread-safe access to accessingURLs
-    private let accessingURLsQueue = DispatchQueue(label: "open.fpvlabs.stera.securityScopedURLHelper.accessingURLs")
+    private let accessingURLsQueue = DispatchQueue(label: "io.rootlens.app.securityScopedURLHelper.accessingURLs")
     
     // MARK: - Bookmark Management
     

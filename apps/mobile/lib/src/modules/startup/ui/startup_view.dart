@@ -13,6 +13,7 @@ import "package:stera/src/modules/startup/ui/splash_view.dart";
 import "package:stera/src/modules/startup/ui/startup_error_view.dart";
 import "package:stera/src/modules/startup/view_models/startup_view_model.dart";
 import "package:stera/src/services/upload_service/lifecycle/upload_app_lifecycle_handler.dart";
+import "package:stera/src/core/config/constants/brand.dart";
 import "package:flutter/material.dart";
 import "package:flutter/services.dart";
 import "package:provider/provider.dart";
@@ -125,7 +126,7 @@ class _StartupViewState extends State<StartupView> with WidgetsBindingObserver {
     return MaterialApp(
       key: const ValueKey("startup-shell"),
       debugShowCheckedModeBanner: false,
-      title: "Stera by FPV Labs",
+      title: Brand.appTitle,
       themeMode: themeMode,
       theme: AppTheme.light,
       darkTheme: AppTheme.dark,
@@ -139,7 +140,7 @@ class _StartupViewState extends State<StartupView> with WidgetsBindingObserver {
     return MaterialApp.router(
       key: const ValueKey("startup-router"),
       debugShowCheckedModeBanner: false,
-      title: "Stera by FPV Labs",
+      title: Brand.appTitle,
       routerConfig: AppRouter.router,
       themeMode: themeMode,
       theme: AppTheme.light,

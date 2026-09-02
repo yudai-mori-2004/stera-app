@@ -9,7 +9,7 @@ import "package:flutter/material.dart";
 ///
 /// The rest of the UI is deliberately near-monochrome (everything keys off
 /// `textPrimary`), so this pill and its [C.brandAccent] tint are the only
-/// chromatic cue that distinguishes Stera from the closed-source app.
+/// chromatic cue that distinguishes RootLens from the closed-source app.
 class OpenSourceBadge extends StatelessWidget {
   const OpenSourceBadge({super.key});
 

@@ -1,4 +1,4 @@
-# Stera
+# RootLens
 
 the flutter capture app. records multimodal spatial data on-device.
 

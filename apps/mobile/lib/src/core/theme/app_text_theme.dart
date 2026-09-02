@@ -1,5 +1,6 @@
 import "package:stera/src/core/theme/brand_type.dart";
 import "package:stera/src/core/theme/colors.dart";
+import "package:stera/src/core/theme/brand_fonts.dart";
 import "package:flutter/widgets.dart";
 
 class AppTextTheme {
@@ -66,21 +67,21 @@ class AppTextTheme {
     return AppTextTheme(
       // Headings - 4xl
       head4XlGaramond: TextStyle(
-        fontFamily: "EBGaramond",
+        fontFamily: BrandFonts.display,
         fontSize: BrandType.sizeXl4,
         fontWeight: BrandType.weightMedium,
         height: BrandType.heightXl4,
         color: colors.textPrimary,
       ),
       head4XlHandjet: TextStyle(
-        fontFamily: "Handjet",
+        fontFamily: BrandFonts.accent,
         fontSize: BrandType.sizeXl4,
         fontWeight: BrandType.weightMedium,
         height: BrandType.heightXl4,
         color: colors.textPrimary,
       ),
       head4Xl: TextStyle(
-        fontFamily: "Geist",
+        fontFamily: BrandFonts.body,
         fontSize: BrandType.sizeXl4,
         fontWeight: BrandType.weightBold,
         height: BrandType.heightXl4,
@@ -89,21 +90,21 @@ class AppTextTheme {
 
       // Headings - 3xl
       head3XlGaramond: TextStyle(
-        fontFamily: "EBGaramond",
+        fontFamily: BrandFonts.display,
         fontSize: BrandType.sizeXl3,
         fontWeight: BrandType.weightMedium,
         height: BrandType.heightXl3,
         color: colors.textPrimary,
       ),
       head3XlHandjet: TextStyle(
-        fontFamily: "Handjet",
+        fontFamily: BrandFonts.accent,
         fontSize: BrandType.sizeXl3,
         fontWeight: BrandType.weightMedium,
         height: BrandType.heightXl3,
         color: colors.textPrimary,
       ),
       head3Xl: TextStyle(
-        fontFamily: "Geist",
+        fontFamily: BrandFonts.body,
         fontSize: BrandType.sizeXl3,
         fontWeight: BrandType.weightBold,
         height: BrandType.heightXl3,
@@ -112,7 +113,7 @@ class AppTextTheme {
 
       // Headings - 2xl
       head2Xl: TextStyle(
-        fontFamily: "Geist",
+        fontFamily: BrandFonts.body,
         fontSize: BrandType.sizeXl2,
         fontWeight: BrandType.weightSemibold,
         height: BrandType.heightXl2,
@@ -121,7 +122,7 @@ class AppTextTheme {
 
       // Headings - xl
       headXl: TextStyle(
-        fontFamily: "Geist",
+        fontFamily: BrandFonts.body,
         fontSize: BrandType.sizeXl,
         fontWeight: BrandType.weightSemibold,
         height: BrandType.heightXl,
@@ -130,7 +131,7 @@ class AppTextTheme {
 
       // Headings - lg
       headLg: TextStyle(
-        fontFamily: "Geist",
+        fontFamily: BrandFonts.body,
         fontSize: BrandType.sizeLg,
         fontWeight: BrandType.weightSemibold,
         height: BrandType.heightLg,
@@ -139,7 +140,7 @@ class AppTextTheme {
 
       // Headings - md
       headMd: TextStyle(
-        fontFamily: "Geist",
+        fontFamily: BrandFonts.body,
         fontSize: BrandType.sizeMd,
         fontWeight: BrandType.weightSemibold,
         height: BrandType.heightMd,
@@ -148,7 +149,7 @@ class AppTextTheme {
 
       // Headings - sm
       headSm: TextStyle(
-        fontFamily: "Geist",
+        fontFamily: BrandFonts.body,
         fontSize: BrandType.sizeSm,
         fontWeight: BrandType.weightSemibold,
         height: BrandType.heightSm,
@@ -157,14 +158,14 @@ class AppTextTheme {
 
       // Body - lg
       bodyLgMedium: TextStyle(
-        fontFamily: "Geist",
+        fontFamily: BrandFonts.body,
         fontSize: BrandType.sizeLg,
         fontWeight: BrandType.weightMedium,
         height: BrandType.heightLg,
         color: colors.textPrimary,
       ),
       bodyLg: TextStyle(
-        fontFamily: "Geist",
+        fontFamily: BrandFonts.body,
         fontSize: BrandType.sizeLg,
         fontWeight: BrandType.weightRegular,
         height: BrandType.heightLg,
@@ -173,14 +174,14 @@ class AppTextTheme {
 
       // Body - md
       bodyMdMedium: TextStyle(
-        fontFamily: "Geist",
+        fontFamily: BrandFonts.body,
         fontSize: BrandType.sizeMd,
         fontWeight: BrandType.weightMedium,
         height: BrandType.heightMd,
         color: colors.textPrimary,
       ),
       bodyMd: TextStyle(
-        fontFamily: "Geist",
+        fontFamily: BrandFonts.body,
         fontSize: BrandType.sizeMd,
         fontWeight: BrandType.weightRegular,
         height: BrandType.heightMd,
@@ -189,21 +190,21 @@ class AppTextTheme {
 
       // Body - sm
       bodySmMedium: TextStyle(
-        fontFamily: "Geist",
+        fontFamily: BrandFonts.body,
         fontSize: BrandType.sizeSm,
         fontWeight: BrandType.weightMedium,
         height: BrandType.heightSm,
         color: colors.textPrimary,
       ),
       bodySm: TextStyle(
-        fontFamily: "Geist",
+        fontFamily: BrandFonts.body,
         fontSize: BrandType.sizeSm,
         fontWeight: BrandType.weightRegular,
         height: BrandType.heightSm,
         color: colors.textPrimary,
       ),
       bodySmMono: TextStyle(
-        fontFamily: "GeistMono",
+        fontFamily: BrandFonts.mono,
         fontSize: BrandType.sizeSm,
         fontWeight: BrandType.weightRegular,
         height: BrandType.heightSm,
@@ -212,21 +213,21 @@ class AppTextTheme {
 
       // Body - xs
       bodyXsMedium: TextStyle(
-        fontFamily: "Geist",
+        fontFamily: BrandFonts.body,
         fontSize: BrandType.sizeXs,
         fontWeight: BrandType.weightMedium,
         height: BrandType.heightXs,
         color: colors.textPrimary,
       ),
       bodyXs: TextStyle(
-        fontFamily: "Geist",
+        fontFamily: BrandFonts.body,
         fontSize: BrandType.sizeXs,
         fontWeight: BrandType.weightRegular,
         height: BrandType.heightXs,
         color: colors.textPrimary,
       ),
       bodyXsMono: TextStyle(
-        fontFamily: "GeistMono",
+        fontFamily: BrandFonts.mono,
         fontSize: BrandType.sizeXs,
         fontWeight: BrandType.weightRegular,
         height: BrandType.heightXs,

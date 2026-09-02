@@ -1,0 +1,22 @@
+# Checks that RootLens stays RootLens.
+#
+# `brand:verify` catches what no compiler will: a widget that reintroduces a
+# literal colour or radius, a stale upstream identifier that came back with a
+# merge, a Kotlin package that stopped matching its directory. Written by
+# `bun run brand:apply`; yours to edit from here.
+name: brand
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+      - run: bun install --frozen-lockfile
+      - run: bun test packages/brand/
+      - run: bun run brand:verify

@@ -102,7 +102,7 @@ curl -s https://api.example.com/api/auth/get-session
 These live in neither the old app nor egoapp-backend today — Supabase Auth held them. Move them into `apps/server/.env` before go-live:
 
 - **`GOOGLE_CLIENT_SECRET`** — Supabase dashboard → Authentication → Providers → Google, or GCP Credentials for the web OAuth client
-- **Apple Sign In** — `APPLE_CLIENT_ID` (Services ID), `APPLE_TEAM_ID`, `APPLE_KEY_ID`, `APPLE_PRIVATE_KEY` (`.p8` PEM from Apple Developer → Keys), `APPLE_APP_BUNDLE_IDENTIFIER` (`open.fpvlabs.stera`)
+- **Apple Sign In** — `APPLE_CLIENT_ID` (Services ID), `APPLE_TEAM_ID`, `APPLE_KEY_ID`, `APPLE_PRIVATE_KEY` (`.p8` PEM from Apple Developer → Keys), `APPLE_APP_BUNDLE_IDENTIFIER` (`io.rootlens.app`)
 - **`BETTER_AUTH_SECRET`** — `openssl rand -base64 32` at deploy time if not supplied
 
 R2 + Google client IDs + Postgres URLs are already known for the open-dev box.

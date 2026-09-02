@@ -13,7 +13,7 @@
 // write your identity straight back into the tracked project file.
 STERA_CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements
 STERA_DEVELOPMENT_TEAM =
-STERA_BUNDLE_ID = com.fpvlabs.fpvlabs
+STERA_BUNDLE_ID = io.rootlens.app
 STERA_CODE_SIGN_STYLE = Manual
 STERA_PROVISIONING_PROFILE =
 GOOGLE_REVERSED_CLIENT_ID = com.googleusercontent.apps.your-ios-client-id

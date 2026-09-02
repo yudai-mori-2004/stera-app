@@ -5,6 +5,8 @@ import "package:stera/src/core/common/widgets/pressable.dart";
 import "package:stera/src/core/config/constants/app_constants.dart";
 import "package:stera/src/core/theme/app_spacing.dart";
 import "package:stera/src/services/app_info/app_info.dart";
+import "package:stera/src/core/config/constants/brand.dart";
+import "package:stera/src/core/config/constants/attribution.dart";
 import "package:flutter/material.dart";
 
 class ProfileFooter extends StatelessWidget {
@@ -37,14 +39,14 @@ class ProfileFooter extends StatelessWidget {
           ),
           Pressable(
             behavior: HitTestBehavior.opaque,
-            semanticLabel: "View Stera source code on GitHub",
+            semanticLabel: "View ${Brand.appName} source code on GitHub",
             onTap: () => AppUrlLauncher.launchUrl(AppConstants.sourceRepo),
             child: Column(
               spacing: AppSpacing.xsPlus,
               children: [
                 const OpenSourceBadge(),
                 Text(
-                  "Stera is open source — view the code on GitHub",
+                  "${Brand.appName} is open source — view the code on GitHub",
                   textAlign: TextAlign.center,
                   style: context.textTheme.bodyXs.copyWith(
                     color: context.colors.textSecondary,
@@ -53,6 +55,21 @@ class ProfileFooter extends StatelessWidget {
               ],
             ),
           ),
+          if (Attribution.enabled && Attribution.showInProfileFooter)
+            Pressable(
+              behavior: HitTestBehavior.opaque,
+              semanticLabel:
+                  "Visit ${Attribution.upstreamName}, the upstream project",
+              onTap: () =>
+                  AppUrlLauncher.launchUrl(Attribution.upstreamRepo),
+              child: Text(
+                Attribution.text,
+                textAlign: TextAlign.center,
+                style: context.textTheme.bodyXs.copyWith(
+                  color: context.colors.textTertiary,
+                ),
+              ),
+            ),
         ],
       ),
     );

@@ -9,6 +9,7 @@ import "package:stera/src/modules/startup/ui/startup_view.dart";
 import "package:stera/src/core/theme/app_radii.dart";
 import "package:stera/src/core/theme/app_spacing.dart";
 import "package:stera/src/core/theme/app_type.dart";
+import "package:stera/src/core/config/constants/brand.dart";
 import "package:flutter/material.dart";
 
 class AppUpdateBottomSheet extends StatelessWidget {
@@ -46,7 +47,7 @@ class AppUpdateBottomSheet extends StatelessWidget {
                 title: isMajorUpdate ? "Update required" : "Update available",
                 subtitle: isMajorUpdate
                     ? "A required update is ready to install."
-                    : "A new version of Stera is ready to install.",
+                    : "A new version of ${Brand.appName} is ready to install.",
                 onClose: isMajorUpdate ? null : () => AppRouter.pop(),
               ),
               const SizedBox(height: AppSpacing.lgPlus),

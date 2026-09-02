@@ -1,0 +1,346 @@
+{
+  "engineVersion": 1,
+  "brand": {
+    "engineVersion": 1,
+    "brand": {
+      "name": "RootLens",
+      "shortName": "RootLens",
+      "slug": "rootlens",
+      "tagline": "Egocentric data capture for embodied AI",
+      "legalEntity": "RootLens",
+      "copyrightYear": 2026
+    },
+    "identifiers": {
+      "bundleId": "io.rootlens.app",
+      "androidApplicationId": "io.rootlens.app",
+      "androidNamespace": "io.rootlens.app",
+      "kotlinPackage": "io.rootlens.app",
+      "dartPackage": "stera",
+      "npmScope": "@stera",
+      "repoName": "stera-open",
+      "recorder": {
+        "rename": false,
+        "dartPackage": "stera_recorder",
+        "kotlinPackage": "open.fpvlabs.stera.ar_recorder",
+        "pluginClass": "SteraRecorderPlugin",
+        "podName": "stera_recorder",
+        "swiftObjcTarget": "stera_recorder_objc",
+        "examplePackage": "open.fpvlabs.stera_recorder_example",
+        "exampleIosBundleId": "open.fpvlabs.steraRecorderExample"
+      },
+      "mcapSchemaNamespace": "stera",
+      "mcapWriterLibrary": "fpv_labs/1.0",
+      "driftDatabaseName": "stera",
+      "bookmarkKeyPrefix": "open.fpvlabs.stera.bookmark.",
+      "systemdServiceName": "stera-server",
+      "deployDirName": "stera-open",
+      "r2Bucket": "stera-uploads",
+      "r2BucketProd": "stera-uploads-prod"
+    },
+    "urls": {
+      "website": "https://rootlens.io",
+      "termsAndConditions": "https://rootlens.io/terms",
+      "privacyPolicy": "https://rootlens.io/privacy",
+      "contactEmail": "contact@rootlens.io",
+      "discordInvite": null,
+      "sourceRepo": "https://github.com/yudai-mori-2004/stera-app",
+      "apiHostDev": "app-dev.rootlens.io",
+      "apiHostProd": "app.rootlens.io",
+      "playStoreAppId": null,
+      "appStoreId": null,
+      "updateFeed": null
+    },
+    "apple": {
+      "developmentTeam": "7Q2XWNS477",
+      "signInServiceId": "io.rootlens.app.signin",
+      "backgroundTaskPrefix": "io.rootlens.app"
+    },
+    "theme": {
+      "brandAccentLight": "0xFF25528E",
+      "brandAccentDark": "0xFF336AB3",
+      "launchBackgroundLight": "0xFFF7F4ED",
+      "launchBackgroundDark": "0xFF2E2F31",
+      "launchForegroundLight": "0xFF18191B",
+      "launchForegroundDark": "0xFFFFFFFF",
+      "tint": 0,
+      "allowLowContrast": false,
+      "overrides": {},
+      "palette": {
+        "textPrimary": {
+          "light": "0xFF18191B",
+          "dark": "0xFFFFFFFF"
+        },
+        "textSecondary": {
+          "light": "0xFF737373",
+          "dark": "0xFFBBBEC3"
+        },
+        "textTertiary": {
+          "light": "0xFFBBBEC3",
+          "dark": "0xFF737373"
+        },
+        "textInversePrimary": {
+          "light": "0xFFFFFFFF",
+          "dark": "0xFF18191B"
+        },
+        "textInverseSecondary": {
+          "light": "0x99FFFFFF",
+          "dark": "0x9918191B"
+        },
+        "textDisabled": {
+          "light": "0xFFC7C7C7",
+          "dark": "0xFF5C5C5C"
+        },
+        "textAlert": {
+          "light": "0xFFB27700",
+          "dark": "0xFFFFB740"
+        },
+        "textDestructive": {
+          "light": "0xFFD32F2F",
+          "dark": "0xFFEF5350"
+        },
+        "surfacePrimary": {
+          "light": "0xFFF8F9FA",
+          "dark": "0xFF18191B"
+        },
+        "surfaceSecondary": {
+          "light": "0xFFFFFFFF",
+          "dark": "0xFF232426"
+        },
+        "surfaceTertiary": {
+          "light": "0xFFF7F4ED",
+          "dark": "0xFF2E2F31"
+        },
+        "surfaceBlack": {
+          "light": "0xFF18191B",
+          "dark": "0xFF000000"
+        },
+        "surfaceWhite": {
+          "light": "0xFFFFFFFF",
+          "dark": "0xFFFFFFFF"
+        },
+        "borderDefault": {
+          "light": "0xFFB7B7B7",
+          "dark": "0xFF5C5C5C"
+        },
+        "borderDisabled": {
+          "light": "0xFFC7C7C7",
+          "dark": "0xFF3D3D3D"
+        },
+        "borderDivider": {
+          "light": "0xFFE0E0E0",
+          "dark": "0xFF3D3D3D"
+        },
+        "borderError": {
+          "light": "0xFFD32F2F",
+          "dark": "0xFFEF5350"
+        },
+        "borderSelected": {
+          "light": "0xFF000000",
+          "dark": "0xFFFFFFFF"
+        },
+        "iconPrimary": {
+          "light": "0xFF737373",
+          "dark": "0xFFBBBEC3"
+        },
+        "iconDisabled": {
+          "light": "0xFFC7C7C7",
+          "dark": "0xFF5C5C5C"
+        },
+        "neutralDarkGray": {
+          "light": "0xFF737373",
+          "dark": "0xFF8E8E93"
+        },
+        "neutralGray": {
+          "light": "0xFFBBBEC3",
+          "dark": "0xFFBBBEC3"
+        },
+        "neutralLightGray": {
+          "light": "0xFFEBEBEB",
+          "dark": "0xFF3D3D3D"
+        },
+        "neutralBlack": {
+          "light": "0xFF18191B",
+          "dark": "0xFF000000"
+        },
+        "neutralWhite": {
+          "light": "0xFFFFFFFF",
+          "dark": "0xFFFFFFFF"
+        },
+        "blue": {
+          "light": "0xFF007AFF",
+          "dark": "0xFF0A84FF"
+        },
+        "red": {
+          "light": "0xFFD32F2F",
+          "dark": "0xFFEF5350"
+        },
+        "green": {
+          "light": "0xFF047A00",
+          "dark": "0xFF32D74B"
+        },
+        "yellow": {
+          "light": "0xFFFFB740",
+          "dark": "0xFFFFB740"
+        },
+        "brandAccent": {
+          "light": "0xFF25528E",
+          "dark": "0xFF336AB3"
+        }
+      },
+      "shape": {
+        "style": "soft",
+        "scale": {
+          "hairline": 1.5,
+          "xs": 4,
+          "xsPlus": 6,
+          "sm": 8,
+          "smPlus": 10,
+          "md": 12,
+          "mdPlus": 14,
+          "lg": 16,
+          "lgPlus": 20,
+          "xl": 24,
+          "xlPlus": 30,
+          "full": 999
+        }
+      },
+      "type": {
+        "style": "default",
+        "scale": {
+          "xs": {
+            "size": 10,
+            "lineHeight": 14
+          },
+          "sm": {
+            "size": 12,
+            "lineHeight": 16
+          },
+          "md": {
+            "size": 14,
+            "lineHeight": 20
+          },
+          "lg": {
+            "size": 16,
+            "lineHeight": 24
+          },
+          "xl": {
+            "size": 18,
+            "lineHeight": 26
+          },
+          "xl2": {
+            "size": 20,
+            "lineHeight": 20
+          },
+          "xl3": {
+            "size": 24,
+            "lineHeight": 24
+          },
+          "xl3Plus": {
+            "size": 28,
+            "lineHeight": 28
+          },
+          "xl4": {
+            "size": 32,
+            "lineHeight": 32
+          }
+        },
+        "weights": {
+          "regular": 400,
+          "medium": 500,
+          "semibold": 600,
+          "bold": 700
+        }
+      },
+      "space": {
+        "style": "default",
+        "scale": {
+          "none": 0,
+          "xxs": 2,
+          "xs": 4,
+          "xsPlus": 6,
+          "sm": 8,
+          "smPlus": 10,
+          "md": 12,
+          "mdPlus": 14,
+          "lg": 16,
+          "lgPlus": 20,
+          "xl": 24,
+          "xlPlus": 28,
+          "xxl": 32,
+          "huge": 64
+        }
+      }
+    },
+    "fonts": {
+      "display": "EBGaramond",
+      "body": "Geist",
+      "mono": "GeistMono",
+      "accent": "Handjet",
+      "files": {},
+      "replaceBundled": false
+    },
+    "assets": {
+      "iconSource": "packages/brand/source/icon.png",
+      "iconForeground": null,
+      "iconBackgroundColor": "0xFFFFFFFF",
+      "iconMonochrome": null,
+      "logoLight": "packages/brand/source/icon.png",
+      "logoDark": "packages/brand/source/icon.png",
+      "splashTexture": null
+    },
+    "copy": {
+      "appName": "RootLens",
+      "appNameShort": "RootLens",
+      "appTitle": "RootLens",
+      "splashTitle": "RootLens",
+      "splashSubtitle": "Powered by Stera",
+      "loginTagline": "Egocentric data capture for embodied AI",
+      "iosUsageDescriptions": {
+        "camera": "RootLens uses your camera to record and capture high-quality video for spatial AI training. Only when you provide consent.",
+        "motion": "RootLens uses motion sensors (accelerometer and gyroscope) to capture IMU data during AR recording for spatial AI training.",
+        "photoLibrary": "RootLens needs access to your photo library to select and upload videos for spatial AI training.",
+        "photoLibraryAdd": "RootLens needs permission to save your recorded and processed videos to your gallery.",
+        "microphone": "Voice commands are used to control recording hands-free.",
+        "speechRecognition": "Voice commands are used to control recording hands-free."
+      }
+    },
+    "attribution": {
+      "enabled": true,
+      "upstreamName": "Stera",
+      "upstreamOrg": "FPV Labs",
+      "upstreamRepo": "https://github.com/fpv-labs/stera-app",
+      "text": "Powered by Stera",
+      "showInProfileFooter": true,
+      "showInReadme": true,
+      "showInAttributionFile": true,
+      "showInMcapMetadata": true
+    },
+    "compat": {
+      "keepMcapAliases": true,
+      "renameDriftDatabase": false,
+      "renameBookmarkPrefix": false
+    },
+    "reference": null,
+    "legacy": {
+      "iosBundleId": "io.rootlens.app",
+      "playStoreAppId": "io.rootlens.app"
+    }
+  },
+  "appliedAt": "2026-09-02T06:59:27.072Z",
+  "gitCommit": "2d391c44e2da6096ed3730b91546c3512b45ff97",
+  "transforms": {
+    "00-preflight": "no-op",
+    "05-backup": "no-op",
+    "10-move-paths": "ok",
+    "20-rewrite-content": "ok",
+    "50-mcap-compat": "no-op",
+    "60-theme": "ok",
+    "65-copy": "ok",
+    "70-assets": "ok",
+    "80-attribution": "ok",
+    "85-env-deploy": "ok",
+    "95-lockfiles": "ok",
+    "99-finish": "ok"
+  },
+  "generatedHashes": {}
+}

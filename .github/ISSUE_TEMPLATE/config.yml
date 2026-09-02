@@ -5,12 +5,12 @@ contact_links:
     about: questions, setup help, and anything that isn't a bug report
 
   - name: security issue
-    url: mailto:contact@fpvlabs.ai
-    about: do not open an issue. email contact@fpvlabs.ai
+    url: mailto:contact@rootlens.io
+    about: do not open an issue. email contact@rootlens.io
 
   - name: docs
     url: https://fpvlabs.ai/stera/docs
-    about: Stera docs, quickstart and api reference
+    about: upstream capture docs, quickstart and API reference
 
   - name: stera-sdk
     url: https://github.com/fpv-labs/stera-sdk

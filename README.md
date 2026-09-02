@@ -1,22 +1,21 @@
 <h1 align="center">
-  <img alt="Stera" src="assets/logo_light.png" height="32" align="center" style="vertical-align: middle;">
-  &nbsp;Stera App
+  <img alt="RootLens" src="assets/logo_light.png" height="32" align="center" style="vertical-align: middle;">
+  &nbsp;RootLens App
 </h1>
 
-<p align="center">by <a href="https://fpvlabs.ai">FPV Labs</a> (<a href="https://fpvlabs.ai">fpvlabs.ai</a>)</p>
+<p align="center">by <a href="https://rootlens.io">RootLens</a> · powered by <a href="#credits">stera-app</a></p>
 
 <p align="center">
   <a href="https://pub.dev/packages/stera_recorder"><img alt="pub.dev" src="https://img.shields.io/pub/v/stera_recorder?color=4c8bf5&logo=dart"></a>
-  <a href="https://fpvlabs.ai/app"><img alt="Platforms" src="https://img.shields.io/badge/platform-iOS%20%7C%20Android-4c8bf5"></a>
+  <a href="https://rootlens.io"><img alt="Platforms" src="https://img.shields.io/badge/platform-iOS%20%7C%20Android-4c8bf5"></a>
   <a href="https://flutter.dev"><img alt="Flutter" src="https://img.shields.io/badge/Flutter-3.44.6-02569B?logo=flutter&logoColor=white"></a>
   <a href="https://bun.sh"><img alt="Bun" src="https://img.shields.io/badge/Bun-1.3.14-000000?logo=bun&logoColor=white"></a>
   <a href="https://www.apache.org/licenses/LICENSE-2.0"><img alt="License" src="https://img.shields.io/badge/license-Apache--2.0-blue"></a>
 </p>
 
 <p align="center">
-  <a href="https://fpvlabs.ai/stera">Website</a> ·
-  <a href="https://fpvlabs.ai/app">Get the iOS app</a> ·
-  <a href="https://fpvlabs.ai/stera/docs">Documentation</a> ·
+  <a href="https://rootlens.io">Website</a> ·
+  <a href="https://fpvlabs.ai/stera/docs">Upstream documentation</a> ·
   <a href="https://github.com/fpv-labs/stera-sdk">Processing SDK</a>
 </p>
 
@@ -25,21 +24,26 @@ long-horizon egocentric and spatial data on commodity hardware. It includes the
 mobile app, native recording engine, upload backend, standalone recorder
 example, and tooling needed to release your own capture app.
 
-Point a phone at what you are doing and Stera records RGB, depth, camera pose,
+This repository is the RootLens distribution of that stack. Product identity,
+application IDs, legal links, and visual assets are RootLens-specific; the
+`stera_recorder` package and the MCAP schema/writer identifiers stay compatible
+with upstream.
+
+Point a phone at what you are doing and RootLens records RGB, depth, camera pose,
 IMU, point clouds, and meshes into one [MCAP](https://mcap.dev) file per
 session, then uploads it for processing. Capture runs through ARKit on iOS and
 ARCore on Android. No custom rig, mount, or capture PC is required.
 
 <p align="center"><strong>Capture → Process → Evaluate → Export</strong></p>
 
-Stera App produces self-contained recordings that can be used with your own
+RootLens App produces self-contained recordings that can be used with your own
 data pipeline or processed with
 [stera-sdk](https://github.com/fpv-labs/stera-sdk). The SDK can turn raw
 recordings into world-anchored 6-DoF trajectories, 21-joint MANO hand poses,
 hierarchical action language, scene geometry, and clean training episodes for
 embodied AI, VLAs, and world models.
 
-Stera is designed for data operations teams launching collection programs,
+RootLens is designed for data operations teams launching collection programs,
 academic labs building experiment-specific datasets, and robotics companies
 scaling capture across contributors, tasks, and environments.
 
@@ -62,7 +66,7 @@ scaling capture across contributors, tasks, and environments.
 
 ## Capture output
 
-Stera aligns multiple asynchronous sensor streams onto one shared timeline:
+RootLens aligns multiple asynchronous sensor streams onto one shared timeline:
 
 - RGB video
 - 6-DoF camera pose
@@ -110,7 +114,7 @@ a practical starting point and tune them for the task and device fleet.
 
 ## Quick start
 
-There are two ways to run Stera. The recorder can run standalone with no
+There are two ways to run RootLens. The recorder can run standalone with no
 backend at all, or you can bring up the full stack with authentication and
 uploads.
 
@@ -121,7 +125,7 @@ OAuth credentials, and object storage entirely. One line of configuration is a
 complete setup:
 
 ```bash
-git clone https://github.com/fpv-labs/stera-app.git
+git clone https://github.com/yudai-mori-2004/stera-app.git
 cd stera-app
 bun install
 
@@ -158,7 +162,7 @@ The full stack additionally requires:
 ### Run the API
 
 ```bash
-git clone https://github.com/fpv-labs/stera-app.git
+git clone https://github.com/yudai-mori-2004/stera-app.git
 cd stera-app
 bun install
 
@@ -224,7 +228,7 @@ to any Flutter app with:
 flutter pub add stera_recorder
 ```
 
-You can embed it without adopting the Stera UI or backend. To work from this
+You can embed it without adopting the RootLens UI or backend. To work from this
 repository instead, run the included one-screen example:
 
 ```bash
@@ -245,7 +249,7 @@ platform requirements, installation, permissions, and API usage.
   storage failures.
 - **New capture interfaces** for hands-free, mounted, assisted, or headless
   workflows.
-- **End-to-end data systems** that connect capture to Stera SDK processing,
+- **End-to-end data systems** that connect capture to `stera-sdk` processing,
   evaluation, and export.
 
 The system boundary is explicit: the app owns the contributor experience, the
@@ -255,7 +259,7 @@ others to be rewritten.
 
 ## White-labeling
 
-Fork Stera and make it your own product by editing
+Fork RootLens and make it your own product by editing
 `packages/brand/brand.json`. That file controls the name, icons, colors, type
 scale, corner radii, spacing, bundle IDs, package names, and deployment
 configuration across the repository.
@@ -287,7 +291,7 @@ workflow.
 - [**MobileEgo Anywhere: Open Infrastructure for Long-Horizon Egocentric Data
   on Commodity Hardware**](https://arxiv.org/abs/2605.05945): the research
   behind collecting hour-plus egocentric trajectories on mobile devices.
-- [**Stera-10M**](https://huggingface.co/datasets/fpvlabs/stera-10m): 200 hours,
+- [**stera-10m**](https://huggingface.co/datasets/fpvlabs/stera-10m): 200 hours,
   584 sessions, and approximately 10 million RGB frames captured with this
   infrastructure.
 
@@ -318,13 +322,24 @@ Never commit secrets. Real `.env` files, Apple `.p8` keys, keystores, and
 Firebase or Google service files are ignored; only placeholder examples belong
 in the repository.
 
-To report a security issue, email [contact@fpvlabs.ai](mailto:contact@fpvlabs.ai)
+To report a security issue in this fork, email [contact@rootlens.io](mailto:contact@rootlens.io)
 instead of opening a public issue.
 
 ## License
 
-Apache 2.0 © [FPV Labs](https://fpvlabs.ai). See [LICENSE](./LICENSE) and
-[NOTICE](./NOTICE).
+Apache 2.0. Upstream copyright and RootLens modifications are documented in
+[LICENSE](./LICENSE), [NOTICE](./NOTICE), and the credits below.
 
-Bundled fonts are licensed under SIL OFL 1.1. The Stera-10M dataset is licensed
+Bundled fonts are licensed under SIL OFL 1.1. The linked upstream dataset is licensed
 under CC BY-NC 4.0; see [NOTICE](./NOTICE) for details.
+
+<!-- brand:attribution:start -->
+
+## Credits
+
+Powered by Stera — built on [Stera](https://github.com/fpv-labs/stera-app) by FPV Labs.
+
+The upstream work is described in [MobileEgo Anywhere](https://arxiv.org/abs/2605.05945), and the
+[Stera-10M](https://huggingface.co/datasets/fpvlabs/stera-10m) dataset is released separately under CC BY-NC 4.0.
+
+<!-- brand:attribution:end -->

@@ -93,7 +93,7 @@ extension VideoPickerImpl: PHPickerViewControllerDelegate {
         // Collect URLs after loading providers; copy to temp for local access.
         let group = DispatchGroup()
         var collectedURLs: [String] = []
-        let urlAccessQueue = DispatchQueue(label: "open.fpvlabs.stera.videoPicker.urlAccessQueue")
+        let urlAccessQueue = DispatchQueue(label: "io.rootlens.app.videoPicker.urlAccessQueue")
         
         for result in results {
             let provider = result.itemProvider

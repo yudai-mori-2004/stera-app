@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-APP_ID="${APP_ID:-open.fpvlabs.stera}"
+APP_ID="${APP_ID:-io.rootlens.app}"
 EXTERNAL_ROOT="${EXTERNAL_ROOT:-/storage/emulated/0/Android/data/${APP_ID}/files/ar_sessions}"
 LOCAL_ROOT="${LOCAL_ROOT:-./logs/arcore_sessions}"
 
@@ -16,7 +16,7 @@ Options:
   --all          Pull all session_* folders
 
 Environment overrides:
-  APP_ID=open.fpvlabs.stera
+  APP_ID=io.rootlens.app
   EXTERNAL_ROOT=/storage/emulated/0/Android/data/<APP_ID>/files/ar_sessions
   LOCAL_ROOT=./logs/arcore_sessions
 

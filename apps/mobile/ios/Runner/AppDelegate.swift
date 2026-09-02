@@ -31,7 +31,7 @@ import UIKit
         handleEventsForBackgroundURLSession identifier: String,
         completionHandler: @escaping () -> Void
     ) {
-        if identifier == "open.fpvlabs.stera.iosWindowedUploader" {
+        if identifier == "io.rootlens.app.iosWindowedUploader" {
             // Phase 2 windowed engine: the out-of-process daemon wakes us with
             // completion events; the manager journals + refills its window.
             ChunkWindowManager.shared.backgroundCompletionHandler = completionHandler

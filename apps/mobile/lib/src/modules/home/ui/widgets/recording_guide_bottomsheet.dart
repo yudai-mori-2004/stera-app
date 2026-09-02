@@ -5,6 +5,7 @@ import "package:stera/src/core/router/app_router.dart";
 import "package:stera/src/core/theme/app_radii.dart";
 import "package:stera/src/core/theme/app_spacing.dart";
 import "package:stera/src/core/theme/app_type.dart";
+import "package:stera/src/core/config/constants/brand.dart";
 import "package:flutter/material.dart";
 import "package:solar_icons/solar_icons.dart";
 
@@ -57,11 +58,11 @@ class RecordingGuideBottomSheet extends StatelessWidget {
     ),
     _GuideStepData(
       icon: SolarIconsOutline.cloudUpload,
-      title: "Upload in Stera",
+      title: "Upload in ${Brand.appName}",
       description:
           "Send the transferred clip to the cloud from the app when you're ready.",
       bullets: [
-        "Open Stera and tap the + on the bottom bar.",
+        "Open ${Brand.appName} and tap the + on the bottom bar.",
         "Pick the file(s) you copied over from your Mac.",
         "Submit on a stable internet connection.",
         "Uploads require an organization-linked account.",

@@ -1,5 +1,6 @@
 import "package:stera/src/core/common/utils/app_version_comparer.dart";
 import "package:stera/src/modules/home/ui/widgets/app_update_bottomsheet.dart";
+import "package:stera/src/core/config/constants/brand.dart";
 import "package:flutter/foundation.dart";
 import "package:flutter/material.dart";
 import "package:upgrader/upgrader.dart";
@@ -9,9 +10,9 @@ class AppUpdate {
   // `bun run brand:apply` rewrites these three from packages/brand/brand.json.
   // All null - the default for a fork that has not published anywhere - means
   // in-app update checks are disabled and nothing is fetched.
-  static const String? _updateFeedUrl = null;
-  static const String? _playStoreUrl = null;
-  static const String? _appStoreUrl = null;
+  static const String? _updateFeedUrl = Brand.updateFeedUrl;
+  static const String? _playStoreUrl = Brand.playStoreUrl;
+  static const String? _appStoreUrl = Brand.appStoreUrl;
 
   static Upgrader? _upgrader;
   static bool _hasCheckedThisSession = false;

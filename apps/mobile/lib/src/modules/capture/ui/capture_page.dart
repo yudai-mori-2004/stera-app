@@ -9,6 +9,7 @@ import "package:stera/src/core/common/widgets/app_button/enums/button_sizes.dart
 import "package:stera/src/core/common/widgets/app_button/enums/button_type.dart";
 import "package:stera/src/core/common/widgets/app_header.dart";
 import "package:stera/src/core/common/widgets/app_toast.dart";
+import "package:stera/src/core/config/constants/attribution.dart";
 import "package:stera/src/core/constants/app_assets.dart";
 import "package:stera/src/core/theme/app_spacing.dart";
 import "package:stera/src/core/theme/app_type.dart";
@@ -113,8 +114,8 @@ class _CapturePageState extends State<CapturePage> with WidgetsBindingObserver {
           child: Scaffold(
             backgroundColor: Colors.transparent,
             appBar: AppHeader(
-              text1: "Stera",
-              text2: " by FPV Labs",
+              text1: "RootLens",
+              text2: Attribution.enabled ? " ${Attribution.text}" : "",
               customStyle2: context.textTheme.head3XlHandjet.copyWith(
                 fontWeight: AppType.bold,
                 fontSize: AppType.xl3Plus,

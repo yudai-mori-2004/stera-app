@@ -1,6 +1,7 @@
 import "package:stera/src/core/common/utils/extensions.dart";
 import "package:stera/src/core/constants/app_assets.dart";
 import "package:stera/src/core/theme/app_spacing.dart";
+import "package:stera/src/core/config/constants/brand.dart";
 import "package:flutter/cupertino.dart";
 import "package:flutter/material.dart";
 
@@ -79,8 +80,8 @@ class _SplashViewState extends State<SplashView>
                 padding: const EdgeInsets.only(bottom: AppSpacing.xxl),
                 child: Column(
                   children: [
-                    Text("Stera", style: context.textTheme.head3XlGaramond),
-                    Text("by FPV Labs", style: context.textTheme.bodyXs),
+                    Text(Brand.splashTitle, style: context.textTheme.head3XlGaramond),
+                    Text(Brand.splashSubtitle, style: context.textTheme.bodyXs),
                   ],
                 ),
               ),

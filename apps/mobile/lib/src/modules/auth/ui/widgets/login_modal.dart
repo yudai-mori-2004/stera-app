@@ -21,6 +21,7 @@ import "package:stera/src/modules/home/ui/navigation_page.dart";
 import "package:stera/src/modules/onboarding/ui/onboarding_page.dart";
 import "package:stera/src/core/theme/app_radii.dart";
 import "package:stera/src/core/theme/app_spacing.dart";
+import "package:stera/src/core/config/constants/brand.dart";
 
 class LoginModal extends StatefulWidget {
   const LoginModal({super.key});
@@ -170,7 +171,7 @@ class _LoginModalState extends State<LoginModal> {
                   ),
                   const SizedBox(height: AppSpacing.md),
                   Text(
-                    "Collect multimodal videos, upload them securely and get high fidelity data though our processing suite for robotics and world model training",
+                    Brand.loginTagline,
                     textAlign: TextAlign.left,
                     style: context.textTheme.bodyMdMedium.copyWith(
                       color: context.colors.textSecondary,

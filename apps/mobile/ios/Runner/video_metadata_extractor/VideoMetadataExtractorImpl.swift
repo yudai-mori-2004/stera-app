@@ -285,7 +285,7 @@ class VideoMetadataExtractorImpl: VideoMetadataExtractor {
         
         // First, try to resolve from a stored bookmark
         // Use same prefix as SecurityScopedURLHelperImpl for consistency
-        let bookmarkKey = "open.fpvlabs.stera.bookmark.\(urlString.hashValue)"
+        let bookmarkKey = "io.rootlens.app.bookmark.\(urlString.hashValue)"
         if let bookmarkData = UserDefaults.standard.data(forKey: bookmarkKey) {
             do {
                 var isStale = false

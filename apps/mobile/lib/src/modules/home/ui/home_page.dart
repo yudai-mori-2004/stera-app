@@ -6,10 +6,12 @@ import "package:stera/src/modules/auth/providers/auth_provider.dart";
 import "package:stera/src/modules/demo/providers/demo_video_preload_provider.dart";
 import "package:stera/src/modules/demo/ui/widgets/app_demo_video_inline_intro_card.dart";
 import "package:stera/src/core/common/widgets/open_source_badge.dart";
+import "package:stera/src/core/config/constants/attribution.dart";
 import "package:stera/src/core/theme/app_spacing.dart";
 import "package:stera/src/core/theme/app_type.dart";
 import "package:stera/src/modules/home/ui/widgets/upload_progress_card.dart";
 import "package:stera/src/modules/uploaded_videos/providers/uploaded_videos_provider.dart";
+import "package:stera/src/core/config/constants/brand.dart";
 import "package:flutter/material.dart";
 import "package:provider/provider.dart";
 
@@ -77,8 +79,8 @@ class _HomePageState extends State<HomePage> {
         child: Scaffold(
           backgroundColor: Colors.transparent,
           appBar: AppHeader(
-            text1: "Stera",
-            text2: " by FPV Labs",
+            text1: Brand.appName,
+            text2: Attribution.enabled ? " ${Attribution.text}" : "",
             customStyle2: context.textTheme.head3XlHandjet.copyWith(
               fontWeight: AppType.bold,
               fontSize: AppType.xl3Plus,
