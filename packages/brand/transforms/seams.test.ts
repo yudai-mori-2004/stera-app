@@ -21,11 +21,16 @@ describe("copy seams still match the tree", () => {
     test(target.path, async () => {
       const source = await Bun.file(join(ROOT, target.path)).text();
 
-      // Not yet seamed: the marker arrives only after the first apply.
-      expect(source).not.toContain(target.needs);
-
-      for (const [from] of target.pairs) {
-        expect(source).toContain(from);
+      if (source.includes(target.needs)) {
+        // A fork runs these tests after brand:apply as well. In that state the
+        // generated Brand seam is the contract, not the old upstream literal.
+        for (const [, to] of target.pairs) {
+          expect(source).toContain(to);
+        }
+      } else {
+        for (const [from] of target.pairs) {
+          expect(source).toContain(from);
+        }
       }
     });
   }

@@ -30,7 +30,7 @@ import { TOKEN_NAMES } from "./lib/palette.ts";
 import { snapToStep } from "./lib/shape.ts";
 import { snapToSpaceStep } from "./lib/space.ts";
 import { readState } from "./lib/state.ts";
-import { findStale, staleTokensOf } from "./lib/tokens.ts";
+import { applyTokens, buildTokens } from "./lib/tokens.ts";
 import { snapToTypeStep, snapToWeightRole } from "./lib/type.ts";
 import { UPSTREAM_ASSET_HASHES, UPSTREAM_BRAND } from "./lib/upstream.ts";
 import type { Brand, FileIndex } from "./lib/types.ts";
@@ -135,11 +135,20 @@ const stripAttributionBlock = (text: string): string => {
 // ---------------------------------------------------------------------------
 
 const checkNoStaleTokens = async (ctx: CheckCtx): Promise<CheckResult> => {
-  const tokens = staleTokensOf(ctx.prev);
+  const tokens = buildTokens(ctx.prev, ctx.next);
   const hits: string[] = [];
 
   for (const path of ctx.files.rewritable()) {
     if (isAllowed(path)) {
+      continue;
+    }
+    // `recorder.rename: false` is an explicit promise that the reusable
+    // recorder package stays upstream-compatible. Its package names,
+    // attribution and documentation are therefore not stale app branding.
+    if (
+      !ctx.next.identifiers.recorder.rename &&
+      path.startsWith(`packages/${ctx.prev.identifiers.recorder.dartPackage}/`)
+    ) {
       continue;
     }
     // README.md is checked, but the credits block inside it is an attribution
@@ -147,8 +156,9 @@ const checkNoStaleTokens = async (ctx: CheckCtx): Promise<CheckResult> => {
     // region is more precise than allowlisting the whole file, which would let
     // a genuinely missed token hide anywhere else in it.
     const text = stripAttributionBlock(await ctx.files.read(path));
-    for (const hit of findStale(text, tokens)) {
-      hits.push(`${path}:${hit.line}:${hit.column}  ${hit.token}  ${DIM}${hit.excerpt}${RESET}`);
+    const result = applyTokens(text, tokens);
+    for (const [label, count] of result.hits) {
+      hits.push(`${path}: ${count} unresolved ${label} token(s)`);
     }
   }
 
@@ -243,7 +253,10 @@ const checkDartPackage = async (ctx: CheckCtx): Promise<CheckResult> => {
     if (text.includes(`package:${expected}/`)) {
       current += 1;
     }
-    if (text.includes(`package:${ctx.prev.identifiers.dartPackage}/`)) {
+    if (
+      ctx.prev.identifiers.dartPackage !== expected &&
+      text.includes(`package:${ctx.prev.identifiers.dartPackage}/`)
+    ) {
       stale += 1;
       staleFiles.push(path);
     }
@@ -282,7 +295,12 @@ const checkAppIdConsistency = async (ctx: CheckCtx): Promise<CheckResult> => {
     )
   );
   // The test target is legitimately `<bundleId>.RunnerTests`.
-  const appBundleIds = [...bundleIds].filter((id) => !id.endsWith(".RunnerTests"));
+  const appBundleIds = [...bundleIds]
+    .filter((id) => !id.endsWith(".RunnerTests"))
+    .map((id) => {
+      const unquoted = id.replace(/^"|"$/g, "");
+      return /^\$\([^:]+:default=([^)]+)\)$/.exec(unquoted)?.[1] ?? unquoted;
+    });
   found.iosBundleId = appBundleIds[0];
 
   // After the seam refactor the Play Store URL lives in the generated
@@ -537,17 +555,18 @@ const checkStoryboard = async (ctx: CheckCtx): Promise<CheckResult> => {
 
 const checkNoOrphanedPackageRoots = (ctx: CheckCtx): CheckResult => {
   const name = "no files remain under the previous Kotlin package root";
-  const staleRoot = ctx.prev.identifiers.kotlinPackage.split(".")[0];
-  if (staleRoot === undefined || staleRoot === ctx.next.identifiers.kotlinPackage.split(".")[0]) {
+  const previousPackage = ctx.prev.identifiers.kotlinPackage;
+  if (previousPackage === ctx.next.identifiers.kotlinPackage) {
     return skip(name, "the package root did not change");
   }
+  const staleRoot = `apps/mobile/android/app/src/main/kotlin/${previousPackage.split(".").join("/")}/`;
   const orphans = ctx.files
     .all()
-    .filter((path) => path.includes(`/src/main/kotlin/${staleRoot}/`));
+    .filter((path) => path.startsWith(staleRoot));
 
   return orphans.length === 0
     ? pass(name)
-    : fail(name, `${orphans.length} file(s) still under /kotlin/${staleRoot}/`, orphans.slice(0, 20));
+    : fail(name, `${orphans.length} file(s) still under ${staleRoot}`, orphans.slice(0, 20));
 };
 
 // ---------------------------------------------------------------------------
