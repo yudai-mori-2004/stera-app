@@ -355,6 +355,7 @@ export const copy: Transform = {
 
   owns(prev: Brand): string[] {
     return [
+      BRAND_DART_PATH,
       ...copySeamTargets(prev).map((target) => target.path),
       STRINGS_XML_PATH,
       INFO_PLIST_PATH,

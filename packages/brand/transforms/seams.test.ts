@@ -3,7 +3,7 @@ import { join } from "node:path";
 import { describe, expect, test } from "bun:test";
 
 import { UPSTREAM_BRAND } from "../lib/upstream.ts";
-import { copySeamTargets } from "./seams.ts";
+import { copy, copySeamTargets } from "./seams.ts";
 
 const ROOT = join(import.meta.dir, "..", "..", "..");
 
@@ -34,6 +34,12 @@ describe("copy seams still match the tree", () => {
       }
     });
   }
+});
+
+test("copy owns its generated Brand file on subsequent runs", () => {
+  expect(copy.owns?.(UPSTREAM_BRAND, UPSTREAM_BRAND)).toContain(
+    "apps/mobile/lib/src/core/config/constants/brand.dart"
+  );
 });
 
 describe("the update seam", () => {
