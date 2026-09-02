@@ -101,6 +101,9 @@ const ATTRIBUTION_ALLOWLIST: readonly RegExp[] = [
   /(^|\/)NOTICE$/,
   /(^|\/)CHANGELOG\.md$/,
   /(^|\/)attribution\.dart$/,
+  // These documents exist specifically to name and track the upstream.
+  /^UPSTREAM\.md$/,
+  /^\.github\/upstream-sync-pr\.md$/,
   // Legacy MCAP schema aliases live here on purpose when compat is kept.
   /(^|\/)ros2_message_decoder\.dart$/,
   // Lockfiles are regenerated, not rewritten; they lag until `bun install`.
