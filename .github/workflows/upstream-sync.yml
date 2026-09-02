@@ -54,5 +54,5 @@ jobs:
             --repo "$GITHUB_REPOSITORY" \
             --base main \
             --head fpv-labs:main \
-            --title "chore: sync FPV Labs upstream" \
+            --title "chore: sync stera-app upstream" \
             --body-file .github/upstream-sync-pr.md
