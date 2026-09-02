@@ -293,7 +293,7 @@
       "appNameShort": "RootLens",
       "appTitle": "RootLens",
       "splashTitle": "RootLens",
-      "splashSubtitle": "Powered by Stera",
+      "splashSubtitle": "by RootLens",
       "loginTagline": "Egocentric data capture for embodied AI",
       "iosUsageDescriptions": {
         "camera": "RootLens uses your camera to record and capture high-quality video for spatial AI training. Only when you provide consent.",
@@ -326,19 +326,19 @@
       "playStoreAppId": "io.rootlens.app"
     }
   },
-  "appliedAt": "2026-09-02T06:59:27.072Z",
-  "gitCommit": "2d391c44e2da6096ed3730b91546c3512b45ff97",
+  "appliedAt": "2026-09-02T07:09:51.247Z",
+  "gitCommit": "b5cccd4a2f22daffc4316fe2a789f5e724dbcc23",
   "transforms": {
     "00-preflight": "no-op",
     "05-backup": "no-op",
-    "10-move-paths": "ok",
-    "20-rewrite-content": "ok",
+    "10-move-paths": "no-op",
+    "20-rewrite-content": "no-op",
     "50-mcap-compat": "no-op",
     "60-theme": "ok",
     "65-copy": "ok",
     "70-assets": "ok",
     "80-attribution": "ok",
-    "85-env-deploy": "ok",
+    "85-env-deploy": "no-op",
     "95-lockfiles": "ok",
     "99-finish": "ok"
   },

@@ -29,7 +29,7 @@ class Brand {
 
   /// Splash headline and the line beneath it.
   static const String splashTitle = "RootLens";
-  static const String splashSubtitle = "Powered by Stera";
+  static const String splashSubtitle = "by RootLens";
 
   /// Longer marketing copy on the sign-in sheet.
   static const String loginTagline = "Egocentric data capture for embodied AI";
