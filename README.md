@@ -211,6 +211,8 @@ hardware support.
 | `deploy` | nginx and systemd configuration for EC2 deployment |
 
 See [DEPLOY.md](./DEPLOY.md) for the self-hosted API deployment guide.
+RootLens's upstream-sync and compatibility policy is documented in
+[UPSTREAM.md](./UPSTREAM.md).
 
 ## Use the recorder on its own
 

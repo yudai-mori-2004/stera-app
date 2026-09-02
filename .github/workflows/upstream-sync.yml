@@ -1,0 +1,56 @@
+name: upstream sync
+
+on:
+  schedule:
+    - cron: "17 3 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  open-sync-pr:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Fetch FPV Labs upstream
+        run: |
+          git remote add upstream https://github.com/fpv-labs/stera-app.git
+          git fetch --no-tags upstream main
+
+      - name: Detect new upstream commits
+        id: upstream
+        run: |
+          if git merge-base --is-ancestor upstream/main HEAD; then
+            echo "ahead=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "ahead=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Open review PR
+        if: steps.upstream.outputs.ahead == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          existing="$(gh pr list \
+            --repo "$GITHUB_REPOSITORY" \
+            --base main \
+            --head fpv-labs:main \
+            --state open \
+            --json number \
+            --jq 'length')"
+          if [ "$existing" -gt 0 ]; then
+            echo "An upstream sync PR is already open."
+            exit 0
+          fi
+
+          gh pr create \
+            --repo "$GITHUB_REPOSITORY" \
+            --base main \
+            --head fpv-labs:main \
+            --title "chore: sync FPV Labs upstream" \
+            --body-file .github/upstream-sync-pr.md
