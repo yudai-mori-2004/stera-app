@@ -44,7 +44,8 @@ For each PR:
    ```
 
 4. On a physical iPhone, record and stop a session, open its MCAP preview, and
-   export/share the file. Merge only after that device test passes.
+   export the file through Files or Finder. Merge only after that device test
+   passes.
 5. Record the merged upstream commit in the RootLens release notes.
 
 The checked-in app defaults to RootLens-owned API hosts. Local capture uses
